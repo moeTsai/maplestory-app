@@ -1,0 +1,16 @@
+customtkinter
+ttkbootstrap
+packaging
+mss
+numpy
+opencv-python-headless
+Pillow
+pyautogui
+
+#################
+GitPython
+keyboard
+
+pygame
+pywin32
+tensorflow
