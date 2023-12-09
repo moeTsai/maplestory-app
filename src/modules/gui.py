@@ -19,9 +19,13 @@ class GUI:
     def __init__(self):
         """initialize the GUI class."""
         config.gui = self
+        #  "dark-blue", "sweetkind"
+        ctk.set_appearance_mode('dark')
+        ctk.set_default_color_theme('dark-blue')
 
         self.root = ctk.CTk()
         self.root.title("Maple APP")
+        self.root.wm_iconbitmap()
         icon = ImageTk.PhotoImage(file="assets/icon.png")
         self.root.iconphoto(False, icon)
         # self.root.geometry(GUI.RESOLUTION['DEFAULT'])
