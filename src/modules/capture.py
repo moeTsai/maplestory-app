@@ -103,8 +103,8 @@ class Capture:
                 max(mm_tl[0] + PT_WIDTH, br[0] - MINIMAP_BOTTOM_BORDER),
                 max(mm_tl[1] + PT_HEIGHT, br[1] - MINIMAP_BOTTOM_BORDER)
             )
-            # self.minimap_ratio = (mm_br[0] - mm_tl[0]) / (mm_br[1] - mm_tl[1])
-            # self.minimap_sample = self.frame[mm_tl[1]:mm_br[1], mm_tl[0]:mm_br[0]]
+            self.minimap_ratio = (mm_br[0] - mm_tl[0]) / (mm_br[1] - mm_tl[1])
+            self.minimap_sample = self.frame[mm_tl[1]:mm_br[1], mm_tl[0]:mm_br[0]]
             # self.calibrated = True
 
             with mss.mss() as self.sct:
@@ -120,8 +120,14 @@ class Capture:
                     minimap = self.frame[mm_tl[1]:mm_br[1], mm_tl[0]:mm_br[0]]
                     # Crop the minimap
 
+                     # Determine the player's position
+                    player = utils.multi_match(minimap, PLAYER_TEMPLATE, threshold=0.8)
+                    if player:
+                        config.player_pos = utils.convert_to_relative(player[0], minimap)
+
                     self.minimap = {
                         'minimap': minimap,
+                        'player_pos': config.player_pos,
                     }
 
                     if not self.ready:

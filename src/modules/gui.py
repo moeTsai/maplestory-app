@@ -35,10 +35,11 @@ class GUI:
 
         # # Build the GUI
         # self.navigation = ctk.CTkNotebook(self.root)\
-        self.navigation = ttk.Notebook(self.root)
         self.view = View(self.root)
 
+        self.navigation = ttk.Notebook(self.root)
         self.navigation.pack(expand=True, fill="both")
+
         # self.navigation.bind("<<NotebookTabChanged>>", self.on_tab_change)
         self.root.focus()
 

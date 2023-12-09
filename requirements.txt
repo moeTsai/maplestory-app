@@ -6,11 +6,11 @@ numpy
 opencv-python-headless
 Pillow
 pyautogui
+pywin32
 
 #################
 GitPython
 keyboard
 
 pygame
-pywin32
 tensorflow

@@ -15,11 +15,5 @@ class Tab(ctk.CTkFrame):
 class LabelFrame(ctk.CTkLabel):
     def __init__(self, parent, **kwargs):
         kwargs["text"] = self.__class__.__name__
-
-        super().__init__(parent, **kwargs)
-        self.parent = parent
-
-class ImageFrame(ctk.CTkImage):
-    def __init__(self, parent, **kwargs):
         super().__init__(parent, **kwargs)
         self.parent = parent
