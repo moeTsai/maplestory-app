@@ -1,7 +1,7 @@
 """A collection of variables shared across multiple modules."""
 
 # Describes whether the main bot loop is currently running or not
-enabled = True
+enabled = False
 
 # Shares the video capture loop
 capture = None

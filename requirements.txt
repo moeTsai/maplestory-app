@@ -5,12 +5,16 @@ mss
 numpy
 opencv-python-headless
 Pillow
-pyautogui
 pywin32
+keyboard
+
+# installed but not used
+pyautogui
+
 
 #################
 GitPython
-keyboard
+
 
 pygame
 tensorflow

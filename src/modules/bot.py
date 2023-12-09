@@ -51,6 +51,10 @@ class Bot():
         self.ready = True
 
         while True:
+            # not enabled, sleep
+            if not config.enabled:
+                time.sleep(0.1)
+                continue
             self._custom_f(direction='right')
 
             self._custom_f(direction='left')
