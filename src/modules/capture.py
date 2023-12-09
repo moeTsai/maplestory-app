@@ -6,12 +6,34 @@ import ctypes
 import mss
 import mss.windows
 import numpy as np
-from src.common import config
+from src.common import config, utils
 from ctypes import wintypes
-from PIL import Image
 
 user32 = ctypes.windll.user32
 user32.SetProcessDPIAware()
+
+
+# The distance between the top of the minimap and the top of the screen
+MINIMAP_TOP_BORDER = 5
+
+# The thickness of the other three borders of the minimap
+MINIMAP_BOTTOM_BORDER = 2
+
+# Offset in pixels to adjust for windowed mode
+WINDOWED_OFFSET_TOP = 36
+WINDOWED_OFFSET_LEFT = 10
+
+# The top-left and bottom-right corners of the minimap
+MM_TL_TEMPLATE = cv2.imread('assets/minimap_tl_template.png', 0)
+MM_BR_TEMPLATE = cv2.imread('assets/minimap_br_template.png', 0)
+
+MMT_HEIGHT = max(MM_TL_TEMPLATE.shape[0], MM_BR_TEMPLATE.shape[0])
+MMT_WIDTH = max(MM_TL_TEMPLATE.shape[1], MM_BR_TEMPLATE.shape[1])
+
+
+# The player's symbol on the minimap
+PLAYER_TEMPLATE = cv2.imread('assets/player_template.png', 0)
+PT_HEIGHT, PT_WIDTH = PLAYER_TEMPLATE.shape
 
 
 class Capture:
@@ -31,6 +53,7 @@ class Capture:
             'height': 768
         }
         self.ready = False
+        self.calibrated = False
         self.thread = threading.Thread(target=self._main)
         self.thread.daemon = True
 
@@ -57,8 +80,8 @@ class Capture:
 
             self.window['left'] = rect[0]
             self.window['top'] = rect[1]
-            self.window['width'] = rect[2] - rect[0]
-            self.window['height'] = rect[3] - rect[1]
+            self.window['width'] = max(rect[2] - rect[0], MMT_WIDTH)
+            self.window['height'] = max(rect[3] - rect[1], MMT_HEIGHT)
 
             # Calibrate by finding the top-left and bottom-right corners of the minimap
             with mss.mss() as self.sct:
@@ -68,17 +91,27 @@ class Capture:
                 continue
             cv2.imwrite('map.png', self.frame)
 
+            tl, _ = utils.single_match(self.frame, MM_TL_TEMPLATE)
+            _, br = utils.single_match(self.frame, MM_BR_TEMPLATE, (tl[0], tl[1], 300, 200))
+            br = (br[0]-3, br[1] + 13)
+
             mm_tl = (
-                0,
-                0
+                tl[0] + MINIMAP_BOTTOM_BORDER,
+                tl[1] + MINIMAP_TOP_BORDER
             )
             mm_br = (
-                300,
-                200
+                max(mm_tl[0] + PT_WIDTH, br[0] - MINIMAP_BOTTOM_BORDER),
+                max(mm_tl[1] + PT_HEIGHT, br[1] - MINIMAP_BOTTOM_BORDER)
             )
+            # self.minimap_ratio = (mm_br[0] - mm_tl[0]) / (mm_br[1] - mm_tl[1])
+            # self.minimap_sample = self.frame[mm_tl[1]:mm_br[1], mm_tl[0]:mm_br[0]]
+            # self.calibrated = True
 
             with mss.mss() as self.sct:
                 while True:
+                    # if not self.calibrated:
+                    #     break
+
                     # screenshot
                     self.frame = self.screenshot()
                     if self.frame is None:

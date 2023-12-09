@@ -11,7 +11,7 @@ from src.gui import View
 
 
 class GUI:
-    DISPLAY_FRAME_RATE = 30
+    DISPLAY_FRAME_RATE = 20
     RESOLUTION = {
         'DEFAULT': (800, 600)
     }

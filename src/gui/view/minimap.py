@@ -29,6 +29,8 @@ class Minimap(LabelFrame):
             height, width, _ = img.shape
 
             image = Image.fromarray(img.astype('uint8'))
+
+            
             if self.container is None:
                 self.image = ctk.CTkImage(light_image=image, size=(width, height))
                 self.container = ctk.CTkLabel(config.gui.root, image=self.image, text='')
