@@ -30,11 +30,15 @@ class Minimap(LabelFrame):
 
             image = Image.fromarray(img.astype('uint8'))
 
-            
+            # Create a new image object with the updated image
+            new_image = ctk.CTkImage(light_image=image, size=(width, height))
+
             if self.container is None:
-                self.image = ctk.CTkImage(light_image=image, size=(width, height))
+                # If the container does not exist, create it
+                self.image = new_image
                 self.container = ctk.CTkLabel(config.gui.root, image=self.image, text='')
                 self.container.place(x=10, y=20)
             else:
-                self.image.configure(light_image=image)
-            
+                # Update the existing image without causing flickering
+                self.container.configure(image=new_image)
+                self.container.image = new_image
