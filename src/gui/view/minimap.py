@@ -40,7 +40,8 @@ class Minimap(LabelFrame):
 
 
             # Draw the player's position on top of everything
-            cv2.circle(img, utils.convert_to_absolute(player_pos, img), 3, (0, 0, 255), -1)
+            if player_pos:
+                cv2.circle(img, utils.convert_to_absolute(player_pos, img), 3, (0, 0, 255), -1)
 
             image = Image.fromarray(img.astype('uint8'))
 

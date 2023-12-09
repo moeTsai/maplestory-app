@@ -37,8 +37,6 @@ class GUI:
         self.root.grid_columnconfigure((2, 3), weight=0)
         self.root.grid_rowconfigure((0, 1, 2), weight=1)
 
-
-
         # Build the GUI
         self.view = View(self.root)
 
