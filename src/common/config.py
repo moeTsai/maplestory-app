@@ -16,3 +16,6 @@ path = []
 
 
 player_pos = None
+
+
+bot = None

@@ -32,7 +32,7 @@ class Listener(Configurable):
     def start(self):
         """Start listening to user inputs."""
 
-        print('\n[~] Started keyboard listener')
+        print('\n[-] Started keyboard listener')
         self.thread.start()
 
     def _main(self):

@@ -60,7 +60,7 @@ class Capture:
     def start(self):
         """Starts this Capture's thread."""
 
-        print('\n[~] Started video capture')
+        print('\n[-] Started video capture')
         self.thread.start()
 
 
