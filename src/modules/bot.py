@@ -75,7 +75,7 @@ class Bot():
 
     def _custom_f(self):
         """Custom function to be executed by the bot."""
-        utils_game.climb_robe(ROPES[3])
+        utils_game.climb_robe(ROPES[0])
  
         time.sleep(0.1)
 

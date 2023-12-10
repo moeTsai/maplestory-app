@@ -3,9 +3,9 @@ ttkbootstrap
 packaging
 mss
 numpy
-opencv-python-headless
 Pillow
 pywin32
 keyboard
 PyDirectInput
 ddddocr
+opencv-python-headless
