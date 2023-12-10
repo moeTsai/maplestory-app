@@ -8,14 +8,4 @@ Pillow
 pywin32
 keyboard
 PyDirectInput
-
-# installed but not used
-pyautogui
-
-
-#################
-GitPython
-
-
-pygame
-tensorflow
+ddddocr
