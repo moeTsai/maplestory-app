@@ -6,6 +6,7 @@ import queue
 import cv2
 import numpy as np
 from src.common import config, settings
+
 # from src.common.vkeys import press, click, key_down, key_up
 from random import random
 import pydirectinput as p_in
@@ -111,6 +112,24 @@ def climb_robe(robe_pos, stay=False):
         time.sleep(0.1)
     
 
+def solve_auth(image):
+    """
+    Solve the authentication image.
+    """
+    import ddddocr
+
+    path = 'C:/Users/a0955\OneDrive\文件\GitHub\maplestory-app/assets/auth_test/'
+
+    ocr = ddddocr.DdddOcr()
+
+    
+    with open(f'{path}wmQI.png', 'rb') as f:
+        image_bytes = f.read()
+
+    res = ocr.classification(image_bytes)
+    print(res)
 
 
-
+if __name__ == '__main__':
+    solve_auth(None)
+    pass
