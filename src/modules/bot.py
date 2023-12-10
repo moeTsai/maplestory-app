@@ -7,16 +7,23 @@ import inspect
 import importlib
 import traceback
 from os.path import splitext, basename
-from src.common import config, utils
-from src.common.vkeys import press, click, key_down, key_up
+from src.common import config, utils, utils_game
+# from src.common.vkeys import press, click, key_down, key_up
 from src.common.interfaces import Configurable
 
+
+ROPES = [
+    (0.756, 0.577),
+    (0.513, 0.609),
+    (0.416, 0.796),
+]
 
 class Bot():
 
     DEFAULT_CONFIG = {
         'Interact': 'y',
-        'Feed pet': '9'
+        'Feed pet': '9',
+        'Jump': 'space',
     }
 
     def __init__(self):
@@ -32,7 +39,7 @@ class Bot():
     def start(self):
         """Start the bot."""
 
-        print('\n[~] Started main bot loop')
+        print('\n[-] Started main bot loop')
         self.thread.start()
 
     def _get_player_pos(self):
@@ -55,9 +62,9 @@ class Bot():
             if not config.enabled:
                 time.sleep(0.1)
                 continue
-            self._custom_f(direction='right')
+            self._custom_f()
 
-            self._custom_f(direction='left')
+            time.sleep(5)
 
 
             # player_pos = self._get_player_pos()
@@ -66,11 +73,10 @@ class Bot():
         
 
 
-    def _custom_f(self, direction=None):
+    def _custom_f(self):
         """Custom function to be executed by the bot."""
-        key_down(direction)
-        time.sleep(1)
-        key_up(direction)
-
+        utils_game.climb_robe(ROPES[3])
+ 
+        time.sleep(0.1)
 
         pass
