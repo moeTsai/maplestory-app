@@ -74,10 +74,10 @@ class Listener(Configurable):
     def toggle_enabled():
         """Resumes or pauses the current routine. Plays a sound to notify the user."""
 
-        """
+        
         if not config.enabled:
             Listener.recalibrate_minimap()      # Recalibrate only when being enabled.
-        """
+        
 
         config.enabled = not config.enabled
         utils.print_state()
@@ -93,7 +93,6 @@ class Listener(Configurable):
         config.capture.calibrated = False
         while not config.capture.calibrated:
             time.sleep(0.01)
-        # config.gui.edit.minimap.redraw()
 
     @staticmethod
     def record_position():

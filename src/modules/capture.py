@@ -106,12 +106,12 @@ class Capture:
             )
             self.minimap_ratio = (mm_br[0] - mm_tl[0]) / (mm_br[1] - mm_tl[1])
             self.minimap_sample = self.frame[mm_tl[1]:mm_br[1], mm_tl[0]:mm_br[0]]
-            # self.calibrated = True
+            self.calibrated = True
 
             with mss.mss() as self.sct:
                 while True:
-                    # if not self.calibrated:
-                    #     break
+                    if not self.calibrated:
+                        break
 
                     # screenshot
                     self.frame = self.screenshot()

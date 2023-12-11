@@ -1,5 +1,10 @@
 """A collection of variables shared across multiple modules."""
 
+
+
+#################################
+#       Global Variables        #
+#################################
 # Describes whether the main bot loop is currently running or not
 enabled = False
 
@@ -7,16 +12,19 @@ enabled = False
 capture = None
 
 
-# Shares the gui to all modules
-gui = None
+player_pos = None
 
 
 # Represents the current shortest path that the bot is taking
 path = []
 
 
-player_pos = None
+
+
+
 
 
 bot = None
 
+# Shares the gui to all modules
+gui = None
