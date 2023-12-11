@@ -74,7 +74,9 @@ class Capture:
             handle = user32.FindWindowW(None, '[防爆模式] 楓葉幻境')
 
             rect = wintypes.RECT()
+            
             user32.GetWindowRect(handle, ctypes.pointer(rect))
+            
             rect = (rect.left, rect.top, rect.right, rect.bottom)
             
 
@@ -90,7 +92,6 @@ class Capture:
             if self.frame is None:
                 continue
             cv2.imwrite('map.png', self.frame)
-
             tl, _ = utils.single_match(self.frame, MM_TL_TEMPLATE)
             _, br = utils.single_match(self.frame, MM_BR_TEMPLATE, (tl[0], tl[1], 300, 200))
             br = (br[0]-3, br[1] + 13)

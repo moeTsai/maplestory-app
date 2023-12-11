@@ -2,9 +2,11 @@
 
 import time
 import math
+import io
 import queue
 import cv2
 import numpy as np
+from PIL import Image
 from src.common import config, settings
 
 # from src.common.vkeys import press, click, key_down, key_up
@@ -112,22 +114,33 @@ def climb_robe(robe_pos, stay=False):
         time.sleep(0.1)
     
 
-def solve_auth(image):
+
+
+
+def solve_auth(image_np_array):
     """
     Solve the authentication image.
+
+    :param image_np_array: the image to solve.
+    return: the decoded string.
     """
     import ddddocr
 
-    path = 'C:/Users/a0955\OneDrive\文件\GitHub\maplestory-app/assets/auth_test/'
+    # path = 'C:/Users/a0955\OneDrive\文件\GitHub\maplestory-app/assets/auth_test/'
 
     ocr = ddddocr.DdddOcr()
 
     
-    with open(f'{path}wmQI.png', 'rb') as f:
-        image_bytes = f.read()
+    image = Image.fromarray(np.uint8(image_np_array))
+    image.show()
+
+    type(f'type : {image}')
+    buf = io.BytesIO()
+    image.save(buf, format='PNG')
+    image_bytes = buf.getvalue()
 
     res = ocr.classification(image_bytes)
-    print(res)
+    return res
 
 
 if __name__ == '__main__':
