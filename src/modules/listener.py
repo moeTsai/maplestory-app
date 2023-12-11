@@ -24,6 +24,7 @@ class Listener(Configurable):
 
         self.enabled = False
         self.ready = False
+        self.locked = config.locked
 
         self.thread = threading.Thread(target=self._main)
         self.thread.daemon = True
@@ -42,19 +43,13 @@ class Listener(Configurable):
         self.ready = True
 
         while True:
-            # not enabled, sleep
-            """
-            if not self.enabled:
-                time.sleep(0.1)
-                continue
-            """
-            # print('[-] Listening to keyboard inputs')
-
-            if kb.is_pressed(self.config['Start/stop']):
-                Listener.toggle_enabled()
-            elif self.restricted_pressed('Record position'):
-                Listener.record_position()
-                time.sleep(0.5)
+            # run when the bot is loaded and not locked
+            if self.enabled and not self.locked:
+                if kb.is_pressed(self.config['Start/stop']):
+                    Listener.toggle_enabled()
+                elif self.restricted_pressed('Record position'):
+                    Listener.record_position()
+                    time.sleep(0.5)
             
             time.sleep(0.01)
 

@@ -1,32 +1,23 @@
 """A collection of functions and classes used within game process."""
 
-import time
-import math
-import io
-import queue
-import cv2
-import numpy as np
-from PIL import Image
-from src.common import config, settings
-
-# from src.common.vkeys import press, click, key_down, key_up
-from random import random
+from src.common import config, utils
+import user_var
 import pydirectinput as p_in
-
-
 
 def reset_keys(keys):
     for key in keys:
         p_in.keyUp(key)
 
-
+@utils.run_if_enabled
 def climb_robe(robe_pos, stay=False):
     """
     Climb the robe in the game.
+
+    :param robe_pos: The position of the robe in the minimap.
     """
 
     is_climbing = False
-    kb_config = config.bot.DEFAULT_CONFIG
+    kb_config = user_var.DEFAULT_CONFIG
     jump = kb_config['Jump']
 
 
@@ -109,77 +100,7 @@ def climb_robe(robe_pos, stay=False):
             reset_keys(['up', 'left', 'right'])
             break
         
-        # climb the robe
-
 
         time.sleep(0.1)
     
 
-
-
-
-def solve_auth(image_np_array):
-    """
-    Solve the authentication image.
-
-    :param image_np_array: the image to solve.
-    return: the decoded string.
-    """
-    import ddddocr
-
-
-    ocr = ddddocr.DdddOcr()
-
-    
-    image = Image.fromarray(np.uint8(image_np_array))
-    # image.show()
-
-    # type(f'type : {image}')
-    buf = io.BytesIO()
-    image.save(buf, format='PNG')
-    image_bytes = buf.getvalue()
-
-    res = ocr.classification(image_bytes)
-    return res
-
-
-def type_auth(code, auth_pos):
-    """
-    Type the authentication code.
-
-    :param code: the code to type.
-    :param auth_pos: the position of the authentication box.
-    """
-    p_in.PAUSE = 0.01
-    auth_pos = list(auth_pos)
-    x_bias, y_bias = 25, 50
-
-    auth_pos[0] += x_bias
-    auth_pos[1] += y_bias
-
-    # click the auth box
-    p_in.click(auth_pos[0], auth_pos[1])
-    p_in.click(auth_pos[0], auth_pos[1])
-
-
-    # p_in.write(code, interval=0.2)
-
-    # Error Proofing
-    for _ in range(2):
-        for c in code:
-            p_in.press(c)
-
-            # avoid chinese keyboard input
-            p_in.press(',')
-            p_in.press('backspace')
-            time.sleep(0.2)
-        p_in.press('shift')
-
-    p_in.press('enter')
-    time.sleep(1)
-    p_in.press('enter')
-
-    
-
-    
-    

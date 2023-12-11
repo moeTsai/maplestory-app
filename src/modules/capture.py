@@ -14,14 +14,14 @@ user32.SetProcessDPIAware()
 
 
 # The distance between the top of the minimap and the top of the screen
-MINIMAP_TOP_BORDER = 5
+MINIMAP_TOP_BORDER = 0
 
 # The thickness of the other three borders of the minimap
 MINIMAP_BOTTOM_BORDER = 2
 
 # Offset in pixels to adjust for windowed mode
-WINDOWED_OFFSET_TOP = 36
-WINDOWED_OFFSET_LEFT = 10
+WINDOWED_OFFSET_TOP = 10
+WINDOWED_OFFSET_LEFT = 0
 
 # The top-left and bottom-right corners of the minimap
 MM_TL_TEMPLATE = cv2.imread('assets/minimap_tl_template.png', 0)
@@ -94,7 +94,7 @@ class Capture:
             cv2.imwrite('map.png', self.frame)
             tl, _ = utils.single_match(self.frame, MM_TL_TEMPLATE)
             _, br = utils.single_match(self.frame, MM_BR_TEMPLATE, (tl[0], tl[1], 300, 200))
-            br = (br[0]-3, br[1] + 13)
+            br = (br[0], br[1])
 
             mm_tl = (
                 tl[0] + MINIMAP_BOTTOM_BORDER,

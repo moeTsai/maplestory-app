@@ -14,6 +14,10 @@ capture = None
 
 player_pos = None
 
+real_player_pos = None
+
+locked = False
+
 
 # Represents the current shortest path that the bot is taking
 path = []

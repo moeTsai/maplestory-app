@@ -6,8 +6,10 @@ import cv2
 import inspect
 import importlib
 import traceback
+import importlib
 from os.path import splitext, basename
-from src.common import config, utils, utils_game
+from src.common import config
+import user_var
 # from src.common.vkeys import press, click, key_down, key_up
 from src.common.interfaces import Configurable
 
@@ -18,13 +20,10 @@ ROPES = [
     (0.416, 0.796),
 ]
 
+
+
 class Bot():
 
-    DEFAULT_CONFIG = {
-        'Interact': 'y',
-        'Feed pet': '9',
-        'Jump': 'space',
-    }
 
     def __init__(self):
         """initialize the bot class."""
@@ -32,6 +31,9 @@ class Bot():
 
         self.ready = False
 
+        self.repetative = user_var.repetative
+        self.repeat_times = user_var.repeat_times
+        
         self.config = config.bot
         self.thread = threading.Thread(target=self._main)
         self.thread.daemon = True
@@ -56,15 +58,22 @@ class Bot():
         
         # finish setup
         self.ready = True
+        config.listener.enabled = True
+
+        repeat_times = self.repeat_times
 
         while True:
             # not enabled, sleep
-            if not config.enabled:
-                time.sleep(0.1)
-                continue
-            self._custom_f()
+            if config.enabled and not config.locked:
+                repeat_times -= 1
 
-            time.sleep(5)
+                self.custom_function()
+                
+                # exit if not repetative or repeat_times == 0
+                if not self.repetative or repeat_times == 0:
+                    break
+
+            time.sleep(0.01)
 
 
             # player_pos = self._get_player_pos()
@@ -72,10 +81,17 @@ class Bot():
             
         
 
-
-    def _custom_f(self):
+    
+    def custom_function(self):
         """Custom function to be executed by the bot."""
-        utils_game.climb_robe(ROPES[0])
+
+        from src.routine import daemon_slime
+
+        daemon_slime._main()
+        ## load the routine        
+        # routine = importlib.import_module(user_var.routine)
+
+        # routine._main()
  
         time.sleep(0.1)
 

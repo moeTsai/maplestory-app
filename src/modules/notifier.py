@@ -9,7 +9,8 @@ import numpy as np
 import keyboard as kb
 
 from src.common import config, utils
-from src.common.utils_game import solve_auth, type_auth
+# from src.common.utils_game import solve_auth, type_auth
+from src.detection.detection import solve_auth, type_auth
 
 
 
@@ -47,8 +48,10 @@ class Notifier:
                 height, width, _ = frame.shape
 
                 
-                auth_frame = frame[height // 4:3 * height // 4, width // 4:3 * width // 4]
-                auth = utils.multi_match(auth_frame, AUTH_TEMPLATE, threshold=0.8)
+                # auth_frame = frame[height // 4:3 * height // 4, width // 4:3 * width // 4]
+                # auth = utils.multi_match(auth_frame, AUTH_TEMPLATE, threshold=0.8)
+
+                auth = utils.multi_match(frame, AUTH_TEMPLATE, threshold=0.8)
 
 
                 # save the auth
@@ -68,7 +71,7 @@ class Notifier:
         def filter_alphanumeric(text):
             return "".join(filter(lambda x: x.isalnum(), text))
         # pause the program
-        # config.enabled = False
+        config.locked = True
 
         auth_pos = list(auth_pos)
         x_bias, y_bias = 260, 250
@@ -104,7 +107,7 @@ class Notifier:
 
 
         # resume the program
-        # config.enabled = True
+        config.locked = False
         
 
 
