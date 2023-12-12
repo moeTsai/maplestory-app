@@ -15,12 +15,12 @@ def main():
     notifier = Notifier()
     print('\n[-] Successfully initialized Maple APP')
 
-    bot.start()
-    while not bot.ready:
-        time.sleep(0.01)
-
     capture.start()
     while not capture.ready:
+        time.sleep(0.01)
+
+    bot.start()
+    while not bot.ready:
         time.sleep(0.01)
 
     listener.start()

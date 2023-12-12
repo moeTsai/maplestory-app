@@ -1,17 +1,67 @@
 """A collection of functions and classes used within game process."""
 
 import time
-from src.common import config, utils
 import user_var
+from src.common import config, utils
 from src.common.vkeys import press, click, key_down, key_up
-# import pydirectinput as p_in
+import pydirectinput as p_in
+
 
 def reset_keys(keys):
     for key in keys:
         # p_in.keyUp(key)
         key_up(key)
 
-        
+
+
+
+
+def get_hp_location(percentage):
+    dozens = percentage//10 * 10
+    return config.HPs_X[dozens], config.HPs_Y
+    
+def hp_record():
+    """
+    check the hp color and record it.
+    """
+
+    color_temp = {}
+    for i in range(0, 101, 10):
+        color_L = get_hp_location(i)
+        click((color_L[0], color_L[1]))
+        color = config.capture.frame[color_L[1], color_L[0]]
+        color_temp[i] = color
+        # print(f' -  HP {i} color: {color}')
+        time.sleep(0.3)
+    
+    config.HP_COLOR = color_temp
+    config.locked = False
+    print(' -  HP color recorded')
+
+def hp_fill(percentage):
+    """
+    Fill the hp if below the given percentage.
+    
+    :param percentage: The percentage of hp to fill.
+    """
+    # hp_color = config.HP_COLOR
+    # if hp_color is None:
+    #     print('hp color not recorded yet')
+    #     config.locked = True
+    #     return
+    
+    # hp_color = config.HP_COLOR
+    hp_filler = user_var.DEFAULT_CONFIG['Hp potion']
+    
+    color_L = get_hp_location(percentage)
+    print(f' -  HP {percentage} color: {config.capture.frame[color_L[1], color_L[0]]}')
+    # click((color_L[0], color_L[1]))
+    # print(f' -  HP {percentage} color: {hp_color[percentage]}')
+    
+    if all(config.capture.frame[color_L[1], color_L[0]] == [177, 177, 177, 255]):
+        print(f' -  Filling HP from {percentage}%')
+        press(hp_filler, 1)
+
 
 @utils.run_if_enabled
 def climb_robe(robe_pos, stay=False):

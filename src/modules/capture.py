@@ -30,6 +30,9 @@ MM_BR_TEMPLATE = cv2.imread('assets/minimap_br_template.png', 0)
 MMT_HEIGHT = max(MM_TL_TEMPLATE.shape[0], MM_BR_TEMPLATE.shape[0])
 MMT_WIDTH = max(MM_TL_TEMPLATE.shape[1], MM_BR_TEMPLATE.shape[1])
 
+LEVEL_TEMPLATE = cv2.imread('assets/level_template.png', 0)
+
+
 
 # The player's symbol on the minimap
 PLAYER_TEMPLATE = cv2.imread('assets/player_template.png', 0)
@@ -94,6 +97,8 @@ class Capture:
             cv2.imwrite('map.png', self.frame)
             tl, _ = utils.single_match(self.frame, MM_TL_TEMPLATE)
             _, br = utils.single_match(self.frame, MM_BR_TEMPLATE, (tl[0], tl[1], 300, 200))
+            self.get_hp_bar()
+            print(1)
             br = (br[0], br[1])
 
             mm_tl = (
@@ -135,6 +140,29 @@ class Capture:
                         self.ready = True
                     time.sleep(0.001)
 
+    def get_hp_bar(self):
+        _, level = utils.single_match(self.frame, LEVEL_TEMPLATE)
+
+        from src.common import config
+
+        config.HP0_LOCATION = (level[0] + 200, level[1] - 5)
+        config.HP100_LOCATION = (level[0] + 280, level[1] - 5)
+        hp0_location = config.HP0_LOCATION
+        hp100_location = config.HP100_LOCATION
+        config.HPs_X = {
+            0  : (hp0_location[0]),
+            10 : (hp0_location[0] * 9 + hp100_location[0]    )//10,
+            20 : (hp0_location[0] * 8 + hp100_location[0] * 2)//10,
+            30 : (hp0_location[0] * 7 + hp100_location[0] * 3)//10,
+            40 : (hp0_location[0] * 6 + hp100_location[0] * 4)//10,
+            50 : (hp0_location[0] * 5 + hp100_location[0] * 5)//10,
+            60 : (hp0_location[0] * 4 + hp100_location[0] * 6)//10,
+            70 : (hp0_location[0] * 3 + hp100_location[0] * 7)//10,
+            80 : (hp0_location[0] * 2 + hp100_location[0] * 8)//10,
+            90 : (hp0_location[0]     + hp100_location[0] * 9)//10,
+            100: (hp100_location[0])
+        }
+        config.HPs_Y = hp0_location[1]
 
     def screenshot(self, delay=1):
         """Take a screenshot of the game window."""

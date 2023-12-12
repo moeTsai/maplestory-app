@@ -36,6 +36,8 @@ def _main():
     if frame is None:
         print(' -  No frame captured')
         return
+    
+
     bias = 20
     slime_lf = utils.multi_match(frame, SLIME_TEMPLATE_LF, threshold=threshold)
     for slime in slime_lf:
@@ -60,8 +62,6 @@ def _main():
 
     print(f' -  Next slime at player + {next_slime_dir}')
 
-    # feed the pets
-    # p_in.press('pagedown')
 
     attact_slime(next_slime_dir)
 
@@ -69,14 +69,14 @@ def _main():
 def attact_slime(direction_dist):
     """Attack the slime considering direction_dist."""
 
-    too_far = 350
+    too_far = 300
     facing = config.real_player_facing
     if direction_dist > too_far:
         key_down('right')
-        time.sleep(0.1)
+        # time.sleep(0.1)
     elif direction_dist < -too_far:
         key_down('left')
-        time.sleep(0.1)
+        # time.sleep(0.1)
     elif direction_dist > 0:
         reset_keys(['left', 'right'])
         if facing and facing != 'left':
@@ -91,7 +91,7 @@ def attact_slime(direction_dist):
             facing = 'left'
             press('left', 1)
         press(attact, 1)
-    time.sleep(0.05)
+    time.sleep(0.01)
 
 
 def find_next_slime(slimes, player_pos):

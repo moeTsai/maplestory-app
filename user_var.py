@@ -13,6 +13,8 @@ routine_index = 1
 routine = current_routines[routine_index]
 
 
+hp_percent_to_fill = 50
+
 # if the routine is repetative
 repetative = True
 
@@ -28,6 +30,7 @@ DEFAULT_CONFIG = {
     'Jump': 'space',
     'Attack': 'w',
     'Buff': 'a',
+    'Hp potion': 'delete',
 }
 
 

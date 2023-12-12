@@ -6,6 +6,8 @@ import winsound
 import keyboard as kb
 from src.common.interfaces import Configurable
 from src.common import config, utils
+from src.common import utils_game
+from user_var import DEFAULT_CONFIG
 from datetime import datetime
 
 
@@ -13,7 +15,8 @@ class Listener(Configurable):
     DEFAULT_CONFIG = {
         'Start/stop': 'f10',
         'Reload routine': 'f6',
-        'Record position': 'f7'
+        'Record position': 'f7',
+        'HP record': 'f9',
     }
 
     def __init__(self):
@@ -45,17 +48,23 @@ class Listener(Configurable):
         while True:
             # run when the bot is loaded and not locked
             if self.enabled and not self.locked:
+                # print(self.config['HP record'])
+
                 if kb.is_pressed(self.config['Start/stop']):
                     Listener.toggle_enabled()
                 elif self.restricted_pressed('Record position'):
                     Listener.record_position()
+                    time.sleep(0.5)
+                elif kb.is_pressed(self.config['HP record']):
+                    utils_game.hp_record()
                     time.sleep(0.5)
             
             time.sleep(0.01)
 
     def restricted_pressed(self, action):
         """Returns whether the key bound to ACTION is pressed only if the bot is disabled."""
-
+        
+        # print(f'action: {self.config}')
         if kb.is_pressed(self.config[action]):
             if not config.enabled:
                 return True
@@ -82,6 +91,7 @@ class Listener(Configurable):
         else:
             winsound.Beep(523, 333)     # C5
         time.sleep(0.3)
+
 
     @staticmethod
     def recalibrate_minimap():

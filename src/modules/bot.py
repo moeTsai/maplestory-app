@@ -33,6 +33,7 @@ class Bot():
 
         self.repetative = user_var.repetative
         self.repeat_times = user_var.repeat_times
+        self.hp_percent_to_fill = user_var.hp_percent_to_fill
         
         self.config = config.bot
         self.thread = threading.Thread(target=self._main)
@@ -86,6 +87,9 @@ class Bot():
         """Custom function to be executed by the bot."""
 
         from src.routine import daemon_slime
+        from src.common.utils_game import hp_fill
+        
+        hp_fill(self.hp_percent_to_fill)
 
         daemon_slime._main()
 

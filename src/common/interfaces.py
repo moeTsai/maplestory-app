@@ -18,6 +18,7 @@ class Configurable:
 
     def load_config(self):
         path = os.path.join(self.DIRECTORY, self.TARGET)
+        print(f' -  Loading config from {path}')
         if os.path.isfile(path):
             with open(path, 'rb') as file:
                 loaded = pickle.load(file)
@@ -32,3 +33,9 @@ class Configurable:
             os.makedirs(directory)
         with open(path, 'wb') as file:
             pickle.dump(self.config, file)
+
+
+
+
+
+
