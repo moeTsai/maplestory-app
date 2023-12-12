@@ -31,6 +31,17 @@ DEFAULT_CONFIG = {
     'Attack': 'w',
     'Buff': 'a',
     'Hp potion': 'delete',
+    'Pets': 'pagedown'
 }
 
+# WU
+
+# DEFAULT_CONFIG = {
+#     'Interact': 'y',
+#     'Feed pet': '0',
+#     'Jump': 'b',
+#     'Attack': 'q',
+#     'Buff': 'd',
+#     'Hp potion': 'shift',
+# }
 

@@ -33,6 +33,9 @@ HPs_X = None
 HPs_Y = None
 
 
+last_buff_time = None
+
+
 # Represents the current shortest path that the bot is taking
 path = []
 

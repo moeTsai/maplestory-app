@@ -10,7 +10,7 @@ import importlib
 from os.path import splitext, basename
 from src.common import config
 import user_var
-# from src.common.vkeys import press, click, key_down, key_up
+from src.common.vkeys import press, click, key_down, key_up
 from src.common.interfaces import Configurable
 
 
@@ -38,6 +38,7 @@ class Bot():
         self.config = config.bot
         self.thread = threading.Thread(target=self._main)
         self.thread.daemon = True
+        self.buff_time = 0
 
     def start(self):
         """Start the bot."""
@@ -67,6 +68,13 @@ class Bot():
             # not enabled, sleep
             if config.enabled and not config.locked:
                 repeat_times -= 1
+                
+                now = time.time()
+                if self.buff_time == 0 or now - self.buff_time > 120:
+                    press(user_var.DEFAULT_CONFIG['Buff'], 1)
+                    time.sleep(0.1)
+                    press(user_var.DEFAULT_CONFIG['Pets'], 1)
+                    self.buff_time = now
 
                 self.custom_function()
                 
