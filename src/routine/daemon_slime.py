@@ -4,12 +4,15 @@ import cv2
 import time
 from src.common import config, utils
 from user_var import DEFAULT_CONFIG
+from src.common.vkeys import press, click, key_down, key_up
 from src.common.utils_game import reset_keys
 
 attact = DEFAULT_CONFIG['Attack']
 
-import pydirectinput as p_in
-p_in.PAUSE = 0.01
+# import pydirectinput as p_in
+# p_in.PAUSE = 0.01
+
+
 
 SLIME_TEMPLATE_LF = cv2.imread('assets/routine/daemon_slime/daemon_left.png', 0)
 SLIME_TEMPLATE_RT = cv2.imread('assets/routine/daemon_slime/daemon_right.png', 0)
@@ -57,30 +60,38 @@ def _main():
 
     print(f' -  Next slime at player + {next_slime_dir}')
 
+    # feed the pets
+    # p_in.press('pagedown')
+
     attact_slime(next_slime_dir)
 
 
 def attact_slime(direction_dist):
     """Attack the slime considering direction_dist."""
 
-    too_far = 400
+    too_far = 350
+    facing = config.real_player_facing
     if direction_dist > too_far:
-        p_in.keyUp(attact)
-        p_in.keyDown('right')
+        key_down('right')
         time.sleep(0.1)
     elif direction_dist < -too_far:
-        p_in.keyUp(attact)
-        p_in.keyDown('left')
+        key_down('left')
         time.sleep(0.1)
     elif direction_dist > 0:
         reset_keys(['left', 'right'])
-        p_in.press('right')
-        p_in.keyDown(attact)
+        if facing and facing != 'left':
+            press('right', 1)
+            facing = 'right'
+            press('right', 1)
+        press(attact, 1)
     else:
         reset_keys(['left', 'right'])
-        p_in.press('left')
-        p_in.keyDown(attact)
-    time.sleep(0.01)
+        if facing and facing != 'right':
+            press('left', 1)
+            facing = 'left'
+            press('left', 1)
+        press(attact, 1)
+    time.sleep(0.05)
 
 
 def find_next_slime(slimes, player_pos):

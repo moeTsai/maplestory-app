@@ -16,6 +16,8 @@ player_pos = None
 
 real_player_pos = None
 
+real_player_facing = None
+
 locked = False
 
 

@@ -1,12 +1,17 @@
 """A collection of functions and classes used within game process."""
 
+import time
 from src.common import config, utils
 import user_var
-import pydirectinput as p_in
+from src.common.vkeys import press, click, key_down, key_up
+# import pydirectinput as p_in
 
 def reset_keys(keys):
     for key in keys:
-        p_in.keyUp(key)
+        # p_in.keyUp(key)
+        key_up(key)
+
+        
 
 @utils.run_if_enabled
 def climb_robe(robe_pos, stay=False):

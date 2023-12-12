@@ -88,11 +88,12 @@ class Bot():
         from src.routine import daemon_slime
 
         daemon_slime._main()
-        ## load the routine        
+
+        # load the routine        
         # routine = importlib.import_module(user_var.routine)
 
         # routine._main()
  
-        time.sleep(0.1)
+        time.sleep(0.01)
 
         pass
