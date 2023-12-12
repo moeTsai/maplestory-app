@@ -68,7 +68,6 @@ def _main():
 
 def attact_slime(direction_dist):
     """Attack the slime considering direction_dist."""
-    a = 1
 
     too_far = 300
     facing = config.real_player_facing
