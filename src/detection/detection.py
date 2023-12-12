@@ -17,7 +17,7 @@ def solve_auth(image_np_array):
     import ddddocr
 
 
-    ocr = ddddocr.DdddOcr()
+    ocr = ddddocr.DdddOcr(show_ad=False)
 
     
     image = Image.fromarray(np.uint8(image_np_array))
@@ -42,7 +42,7 @@ def type_auth(code, auth_pos):
     """
     p_in.PAUSE = 0.01
     auth_pos = list(auth_pos)
-    x_bias, y_bias = 25, 50
+    x_bias, y_bias = 40, 75
 
     auth_pos[0] += x_bias
     auth_pos[1] += y_bias
@@ -55,6 +55,7 @@ def type_auth(code, auth_pos):
     # p_in.write(code, interval=0.2)
 
     # Error Proofing
+    """
     for _ in range(2):
         for c in code:
             p_in.press(c)
@@ -64,6 +65,14 @@ def type_auth(code, auth_pos):
             p_in.press('backspace')
             time.sleep(0.2)
         p_in.press('shift')
+    """
+    from pynput.keyboard import Key, Controller
+    keyboard = Controller()
+    keyboard.type(code)
+
+    # p_in.write(code, interval=0.2)
+
+
 
     p_in.press('enter')
     time.sleep(1)

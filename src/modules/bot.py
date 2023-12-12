@@ -38,7 +38,9 @@ class Bot():
         self.config = config.bot
         self.thread = threading.Thread(target=self._main)
         self.thread.daemon = True
-        self.buff_time = 0
+        self.pets_time = 0
+        self.buff1_time = 0
+        self.buff2_time = 0
 
     def start(self):
         """Start the bot."""
@@ -60,28 +62,42 @@ class Bot():
         
         # finish setup
         self.ready = True
-        config.listener.enabled = True
+        # config.listener.enabled = True
 
         repeat_times = self.repeat_times
+        # if repetative, disable repeat_times
+        if self.repetative:
+            repeat_times = -1
 
         while True:
             # not enabled, sleep
             if config.enabled and not config.locked:
-                repeat_times -= 1
                 
                 now = time.time()
-                if self.buff_time == 0 or now - self.buff_time > 120:
-                    press(user_var.DEFAULT_CONFIG['Buff'], 1)
-                    time.sleep(0.1)
+                if self.pets_time == 0 or now - self.pets_time > 60:
                     press(user_var.DEFAULT_CONFIG['Pets'], 1)
-                    self.buff_time = now
+                    self.pets_time = now
+                    time.sleep(0.2)
+                if self.buff1_time == 0 or now - self.buff1_time > 120:
+                    press(user_var.DEFAULT_CONFIG['Buff1'], 1)
+                    self.buff1_time = now
+                    time.sleep(2)
+                
+                # if self.buff2_time == 0 or now - self.buff2_time > 121:
+                #     press(user_var.DEFAULT_CONFIG['Buff2'], 1)
+                #     time.sleep(0.1)
+                #     self.buff2_time = now
+
+                
+
 
                 self.custom_function()
                 
                 # exit if not repetative or repeat_times == 0
                 if not self.repetative or repeat_times == 0:
                     break
-
+                repeat_times -= 1
+                
             time.sleep(0.01)
 
 

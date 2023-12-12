@@ -29,9 +29,10 @@ DEFAULT_CONFIG = {
     'Feed pet': '9',
     'Jump': 'space',
     'Attack': 'w',
-    'Buff': 'a',
+    'Buff1': 'a',
+    'Buff2': 'd',
     'Hp potion': 'delete',
-    'Pets': 'pagedown'
+    'Pets': 'page down'
 }
 
 # WU

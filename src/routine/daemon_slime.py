@@ -37,7 +37,6 @@ def _main():
         print(' -  No frame captured')
         return
     
-
     bias = 20
     slime_lf = utils.multi_match(frame, SLIME_TEMPLATE_LF, threshold=threshold)
     for slime in slime_lf:

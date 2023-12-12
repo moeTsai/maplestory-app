@@ -45,7 +45,7 @@ class Notifier:
                 
 
                 frame = config.capture.frame
-                height, width, _ = frame.shape
+                # height, width, _ = frame.shape
 
                 
                 # auth_frame = frame[height // 4:3 * height // 4, width // 4:3 * width // 4]
@@ -72,9 +72,10 @@ class Notifier:
             return "".join(filter(lambda x: x.isalnum(), text))
         # pause the program
         config.locked = True
+        time.sleep(2)
 
         auth_pos = list(auth_pos)
-        x_bias, y_bias = 260, 250
+        x_bias, y_bias = -85, 50
 
         width, height = 194, 30
 
@@ -90,10 +91,14 @@ class Notifier:
             auth_pos[1] + y_bias + height
         )
 
+        from src.common.vkeys import click
+        # click(auth_pos)
+        # click((tl[0], tl[1]))
+
         cropped = frame[tl[1]:br[1], tl[0]:br[0]]
 
         ## TODO : save all the cropped image
-        # cv2.imwrite('cropped.png', cropped)
+        cv2.imwrite('cropped.png', cropped)
         
         
         code = solve_auth(cropped)

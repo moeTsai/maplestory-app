@@ -25,7 +25,9 @@ class Listener(Configurable):
         config.listener = self
         
 
-        self.enabled = False
+        # self.enabled = False
+        self.enabled = True
+        
         self.ready = False
         self.locked = config.locked
 
