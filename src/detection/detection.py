@@ -42,7 +42,7 @@ def type_auth(code, auth_pos):
     """
     p_in.PAUSE = 0.01
     auth_pos = list(auth_pos)
-    x_bias, y_bias = 40, 75
+    x_bias, y_bias = 40, 80
 
     auth_pos[0] += x_bias
     auth_pos[1] += y_bias
