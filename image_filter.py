@@ -1,4 +1,5 @@
 import cv2
+import matplotlib.pyplot as plt
 
 
 def noise_remove_cv2(image_name, k):
@@ -51,13 +52,36 @@ def noise_remove_cv2(image_name, k):
     return gray_img
 
 
-import matplotlib.pyplot as plt
+# # Display the image using Matplotlib
+# if __name__ == '__main__':
+#     image_path = "path_to_your_image.jpg"
+#     processed_image = noise_remove_cv2(image_path, 4)
+#     plt.imshow(cv2.cvtColor(processed_image, cv2.COLOR_BGR2RGB))
+#     plt.title('Processed Image')
+#     plt.show()
 
 
-# Display the image using Matplotlib
-if __name__ == '__main__':
-    image_path = "path_to_your_image.jpg"
-    processed_image = noise_remove_cv2(image_path, 4)
-    plt.imshow(cv2.cvtColor(processed_image, cv2.COLOR_BGR2RGB))
-    plt.title('Processed Image')
-    plt.show()
+
+import cv2
+from PIL import Image
+import pytesseract
+
+# Set the tesseract path
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
+
+# 讀取圖像
+image = cv2.imread("auth_data\original/2023-12-13_11-23-09__yxtz.png")
+
+# 將圖像轉換為灰度
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+# 應用高斯模糊
+blurred = cv2.GaussianBlur(gray, (5, 5), 0)
+
+# 二值化
+_, thresh = cv2.threshold(blurred, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+# 使用OCR進行文字識別
+text = 
+print(text)

@@ -10,7 +10,7 @@ import keyboard as kb
 from datetime import datetime
 
 from src.common import config, utils
-from src.detection.detection import solve_auth, type_auth, noise_removal
+from src.detection.detection import solve_auth, type_auth
 from src.common.vkeys import click
 
 
@@ -108,14 +108,16 @@ class Notifier:
         
         print(f' -  Auth code: {code}')
         code = filter_alphanumeric(code)
-        original, _ = self.folder_check()
+        original, filtered = self.folder_check()
         
         current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         original_path = f'{original}/{current_time}__{code}.png'
+        # filtered_path = f'{filtered}/{current_time}__{code}.png'
 
         cv2.imwrite(original_path, cropped)
 
         type_auth(code, tl)
+
         time.sleep(10)
         time.sleep(0.1)
         
@@ -151,7 +153,5 @@ class Notifier:
 
 
 # save the image
-
-
 
 
