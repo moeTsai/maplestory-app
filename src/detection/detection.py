@@ -42,7 +42,7 @@ def type_auth(code, auth_pos):
     """
     p_in.PAUSE = 0.01
     auth_pos = list(auth_pos)
-    x_bias, y_bias = 40, 80
+    x_bias, y_bias = 50, 85
 
     auth_pos[0] += x_bias
     auth_pos[1] += y_bias
@@ -66,9 +66,11 @@ def type_auth(code, auth_pos):
             time.sleep(0.2)
         p_in.press('shift')
     """
+    """
     # from pynput.keyboard import Key, Controller
     # keyboard = Controller()
     # keyboard.type(code)
+    """
 
     p_in.write(code, interval=0.2)
 
