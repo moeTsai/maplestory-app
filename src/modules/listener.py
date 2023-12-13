@@ -4,20 +4,22 @@ import time
 import threading
 import winsound
 import keyboard as kb
+import user_var
 from src.common.interfaces import Configurable
 from src.common import config, utils
 from src.common import utils_game
-from user_var import DEFAULT_CONFIG
 from datetime import datetime
 
 
 class Listener(Configurable):
-    DEFAULT_CONFIG = {
-        'Start/stop': 'f10',
-        'Reload routine': 'f6',
-        'Record position': 'f7',
-        'HP record': 'f9',
-    }
+    # DEFAULT_CONFIG = {
+    #     'Start/stop': 'f10',
+    #     'Reload routine': 'f6',
+    #     'Record position': 'f7',
+    #     'HP record': 'f9',
+    # }
+
+    DEFAULT_CONFIG = user_var.LISTENER_CONFIG
 
     def __init__(self):
         """Initializes this Listener object's main thread."""

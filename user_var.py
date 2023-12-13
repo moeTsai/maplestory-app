@@ -23,26 +23,10 @@ repetative = True
 repeat_times = 0
 
 
+import z_custom
+DEFAULT_CONFIG = z_custom.DEFAULT_CONFIG
 
-DEFAULT_CONFIG = {
-    'Interact': 'y',
-    'Feed pet': '9',
-    'Jump': 'space',
-    'Attack': 'w',
-    'Buff1': 'a',
-    'Buff2': 'd',
-    'Hp potion': 'delete',
-    'Pets': 'page down'
-}
+LISTENER_CONFIG = z_custom.LISTENER_CONFIG
 
-# WU
 
-# DEFAULT_CONFIG = {
-#     'Interact': 'y',
-#     'Feed pet': '0',
-#     'Jump': 'b',
-#     'Attack': 'q',
-#     'Buff': 'd',
-#     'Hp potion': 'shift',
-# }
 
