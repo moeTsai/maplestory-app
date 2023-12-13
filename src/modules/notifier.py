@@ -47,7 +47,6 @@ class Notifier:
         while True:
             if config.enabled:
                 
-
                 frame = config.capture.frame
                 
                 gift = utils.multi_match(frame, GIFT_TEMPLATE, threshold=0.8)
@@ -59,10 +58,9 @@ class Notifier:
                     cv2.imwrite('gift.png', frame)
                     time.sleep(1)
 
-
                 auth = utils.multi_match(frame, AUTH_TEMPLATE, threshold=0.8)
-                # save the auth
-                # found the auth
+
+                # found the auth save the auth
                 if auth:
                     print(" -  Auth event detected!")
                     cv2.imwrite('auth.png', frame)
@@ -76,7 +74,6 @@ class Notifier:
         
         print(" -  Gift event detected!")
         click(gift_pos)
-
 
 
     def _solve_auth(self, frame, auth_pos):
@@ -111,28 +108,21 @@ class Notifier:
 
         cropped = frame[tl[1]:br[1], tl[0]:br[0]]
 
-        
-        
         code = solve_auth(cropped)
         print(f' -  Auth code: {code}')
-
         code = filter_alphanumeric(code)
-
-
         original, filtered = self.folder_check()
-
-        
-        
         
         current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-
         original_path = f'{original}/{current_time}__{code}.png'
         filtered_path = f'{filtered}/{current_time}__{code}.png'
 
         ## TODO : save all the cropped image
         cv2.imwrite(original_path, cropped)
 
-        # type_auth(code, tl)
+
+
+        type_auth(code, tl)
         time.sleep(10)
         time.sleep(0.1)
             
@@ -141,6 +131,7 @@ class Notifier:
         # resume the program
         config.locked = False
         
+
     def folder_check(self):
         """
         Check if the auth_data folder exists.
