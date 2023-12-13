@@ -32,6 +32,7 @@ def solve_auth(image_np_array):
     return res
 
 
+
 @utils.run_if_enabled
 def type_auth(code, auth_pos):
     """
@@ -72,7 +73,7 @@ def type_auth(code, auth_pos):
     # keyboard.type(code)
     """
 
-    p_in.write(code, interval=0.2)
+    p_in.write(code, interval=0.5)
 
 
 

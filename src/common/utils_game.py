@@ -6,15 +6,10 @@ from src.common import config, utils
 from src.common.vkeys import press, click, key_down, key_up
 import pydirectinput as p_in
 
-
 def reset_keys(keys):
     for key in keys:
         # p_in.keyUp(key)
         key_up(key)
-
-
-
-
 
 def get_hp_location(percentage):
     dozens = percentage//10 * 10
@@ -54,7 +49,7 @@ def hp_fill(percentage):
     hp_filler = user_var.DEFAULT_CONFIG['Hp potion']
     
     color_L = get_hp_location(percentage)
-    print(f' -  HP {percentage} color: {config.capture.frame[color_L[1], color_L[0]]}')
+    # print(f' -  HP {percentage} color: {config.capture.frame[color_L[1], color_L[0]]}')
     # click((color_L[0], color_L[1]))
     # print(f' -  HP {percentage} color: {hp_color[percentage]}')
     

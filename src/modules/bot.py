@@ -58,7 +58,6 @@ class Bot():
         """The main bot loop."""
 
         # TODO setups
-
         
         # finish setup
         self.ready = True
@@ -87,9 +86,6 @@ class Bot():
                 #     press(user_var.DEFAULT_CONFIG['Buff2'], 1)
                 #     time.sleep(0.1)
                 #     self.buff2_time = now
-
-                
-
 
                 self.custom_function()
                 

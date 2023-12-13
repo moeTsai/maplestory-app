@@ -92,7 +92,6 @@ class Notifier:
 
         print(f' -  auth pos  : {auth_pos}')
 
-
         tl = (
             auth_pos[0] + x_bias,
             auth_pos[1] + y_bias
@@ -120,14 +119,10 @@ class Notifier:
         ## TODO : save all the cropped image
         cv2.imwrite(original_path, cropped)
 
-
-
         type_auth(code, tl)
         time.sleep(10)
         time.sleep(0.1)
-            
-
-
+        
         # resume the program
         config.locked = False
         
