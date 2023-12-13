@@ -79,16 +79,18 @@ def attact_slime(direction_dist):
     elif direction_dist > 0:
         reset_keys(['left', 'right'])
         if facing and facing != 'left':
-            press('right', 1)
+            key_down('right')
+            time.sleep(0.2)
+            key_up('right')
             facing = 'right'
-            press('right', 1)
         press(attact, 1)
     else:
         reset_keys(['left', 'right'])
         if facing and facing != 'right':
-            press('left', 1)
+            key_down('left')
+            time.sleep(0.2)
+            key_up('left')
             facing = 'left'
-            press('left', 1)
         press(attact, 1)
     time.sleep(0.01)
 

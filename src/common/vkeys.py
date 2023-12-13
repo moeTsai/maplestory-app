@@ -82,6 +82,7 @@ KEY_MAP = {
     'x': 0x58,
     'y': 0x59,
     'z': 0x5A,
+    'win': 0x5B,
 
     'f1': 0x70,     # Functional keys
     'f2': 0x71,
