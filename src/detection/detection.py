@@ -66,11 +66,11 @@ def type_auth(code, auth_pos):
             time.sleep(0.2)
         p_in.press('shift')
     """
-    from pynput.keyboard import Key, Controller
-    keyboard = Controller()
-    keyboard.type(code)
+    # from pynput.keyboard import Key, Controller
+    # keyboard = Controller()
+    # keyboard.type(code)
 
-    # p_in.write(code, interval=0.2)
+    p_in.write(code, interval=0.2)
 
 
 
