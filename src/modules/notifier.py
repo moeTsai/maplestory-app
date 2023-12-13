@@ -11,14 +11,18 @@ import keyboard as kb
 from src.common import config, utils
 # from src.common.utils_game import solve_auth, type_auth
 from src.detection.detection import solve_auth, type_auth
+from src.common.vkeys import click
 
 
 
 # auth event template
-AUTH_RANGES = (
-    ((60,130,180), (80, 148, 199)),
-)
+# AUTH_RANGES = (
+#     ((60,130,180), (80, 148, 199)),
+# )
 AUTH_TEMPLATE = cv2.imread('assets/auth_template.png', 0)
+
+GIFT_TEMPLATE = cv2.imread('assets/gift_template.png', 0)
+
 # auth_filtered = utils.filter_color(cv2.imread('assets/auth_template.png'), AUTH_RANGES)
 # AUTH_TEMPLATE = cv2.cvtColor(auth_filtered, cv2.COLOR_BGR2GRAY)
 
@@ -45,15 +49,18 @@ class Notifier:
                 
 
                 frame = config.capture.frame
-                # height, width, _ = frame.shape
-
                 
-                # auth_frame = frame[height // 4:3 * height // 4, width // 4:3 * width // 4]
-                # auth = utils.multi_match(auth_frame, AUTH_TEMPLATE, threshold=0.8)
+                gift = utils.multi_match(frame, GIFT_TEMPLATE, threshold=0.8)
+                if gift:
+                    gift = gift[0]
+                    # bias
+                    gift_pos = (gift[0] + 115, gift[1] + 40)
+                    self._click_gift(gift_pos)
+                    cv2.imwrite('gift.png', frame)
+                    time.sleep(1)
+
 
                 auth = utils.multi_match(frame, AUTH_TEMPLATE, threshold=0.8)
-
-
                 # save the auth
                 # found the auth
                 if auth:
@@ -62,6 +69,13 @@ class Notifier:
                     self._solve_auth(frame, auth[0])
                     time.sleep(10)
             time.sleep(0.1)
+
+    def _click_gift(self, gift_pos):
+        """Click the gift button."""
+        # TODO
+        
+        print(" -  Gift event detected!")
+        click(gift_pos)
 
 
 

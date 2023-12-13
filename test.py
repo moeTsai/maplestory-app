@@ -81,7 +81,7 @@ def change_keyboard_layout():
     import time
 
     def get_keyboard_layouts_windows():
-        # Get the list of installed keyboard layouts
+        # Get the list of installed keyboard layouts 
         layouts = win32api.GetKeyboardLayoutList()
         layout_ids = [hex(layout & 0xFFFF) for layout in layouts]
         return layout_ids
@@ -90,7 +90,7 @@ def change_keyboard_layout():
 
     # print(len(layouts))
     if len(layouts) == 1:
-        print('Only one keyboard layout installed. So does not change the layout.')
+        print('Only one keyboard layout installed. does not change the layout.')
         return
     current_layout = get_current_keyboard_layout()
     
@@ -102,19 +102,7 @@ def change_keyboard_layout():
     elif current_layout == '0x404':
         print(f'Current keyboard layout: {current_layout} (Chinese)')
         print(f'changing to English US')
-        # window + space
-        time.sleep(2)
-        # key_down('win')
-        # time.sleep(0.1)
-        # press('space', 1)
-        # time.sleep(0.1)
-        # key_up('win')
-        
-        p_in.keyDown('winleft')
-        time.sleep(0.3)
-        p_in.press('space')
-        time.sleep(0.3)
-        p_in.keyUp('winleft')
+
         return
     print(f'Keyboard layout attempted to change to English US.')
 
