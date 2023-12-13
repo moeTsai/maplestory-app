@@ -7,9 +7,9 @@ import cv2
 import threading
 import numpy as np
 import keyboard as kb
+from datetime import datetime
 
 from src.common import config, utils
-# from src.common.utils_game import solve_auth, type_auth
 from src.detection.detection import solve_auth, type_auth
 from src.common.vkeys import click
 
@@ -105,14 +105,12 @@ class Notifier:
             auth_pos[1] + y_bias + height
         )
 
-        from src.common.vkeys import click
+        # from src.common.vkeys import click
         # click(auth_pos)
         # click((tl[0], tl[1]))
 
         cropped = frame[tl[1]:br[1], tl[0]:br[0]]
 
-        ## TODO : save all the cropped image
-        cv2.imwrite('cropped.png', cropped)
         
         
         code = solve_auth(cropped)
@@ -120,7 +118,22 @@ class Notifier:
 
         code = filter_alphanumeric(code)
 
-        type_auth(code, tl)
+
+        original, filtered = self.folder_check()
+
+        
+        
+        
+        current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+        original_path = f'{original}/{current_time}__{code}.png'
+        filtered_path = f'{filtered}/{current_time}__{code}.png'
+
+        ## TODO : save all the cropped image
+        cv2.imwrite(original_path, cropped)
+
+        # type_auth(code, tl)
+        time.sleep(10)
         time.sleep(0.1)
             
 
@@ -128,6 +141,28 @@ class Notifier:
         # resume the program
         config.locked = False
         
+    def folder_check(self):
+        """
+        Check if the auth_data folder exists.
+        If not, create one.
+        
+        return: the path of the original and filtered folder.
+        """
+        
+        folder_path = 'auth_data'
+        if not os.path.exists(folder_path):
+            os.mkdir(folder_path)
+
+        original = folder_path + '/original'
+        if not os.path.exists(original):
+            os.mkdir(original)
+        
+        filtered = folder_path + '/filtered'
+
+        if not os.path.exists(filtered):
+            os.mkdir(filtered)
+
+        return original, filtered
 
 
 
