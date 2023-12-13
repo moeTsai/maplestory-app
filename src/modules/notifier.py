@@ -10,7 +10,7 @@ import keyboard as kb
 from datetime import datetime
 
 from src.common import config, utils
-from src.detection.detection import solve_auth, type_auth
+from src.detection.detection import solve_auth, type_auth, noise_removal
 from src.common.vkeys import click
 
 
@@ -65,7 +65,6 @@ class Notifier:
                     print(" -  Auth event detected!")
                     cv2.imwrite('auth.png', frame)
                     self._solve_auth(frame, auth[0])
-                    time.sleep(10)
             time.sleep(0.1)
 
     def _click_gift(self, gift_pos):
@@ -101,22 +100,19 @@ class Notifier:
             auth_pos[1] + y_bias + height
         )
 
-        # from src.common.vkeys import click
-        # click(auth_pos)
-        # click((tl[0], tl[1]))
+        ## TODO : filter the image to raise the accuracy
 
         cropped = frame[tl[1]:br[1], tl[0]:br[0]]
 
         code = solve_auth(cropped)
+        
         print(f' -  Auth code: {code}')
         code = filter_alphanumeric(code)
-        original, filtered = self.folder_check()
+        original, _ = self.folder_check()
         
         current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         original_path = f'{original}/{current_time}__{code}.png'
-        filtered_path = f'{filtered}/{current_time}__{code}.png'
 
-        ## TODO : save all the cropped image
         cv2.imwrite(original_path, cropped)
 
         type_auth(code, tl)
@@ -125,7 +121,8 @@ class Notifier:
         
         # resume the program
         config.locked = False
-        
+    
+
 
     def folder_check(self):
         """
