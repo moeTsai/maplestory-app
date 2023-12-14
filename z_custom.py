@@ -19,6 +19,13 @@ LISTENER_CONFIG = {
 }
 
 
+# BOT_TOKEN = '5983936237:AAEx1Dc_1rtCZUKu2HBjalFen1izzT0bEsg'
+# CHAT_ID = '5831001580' #mao
+
+
+# 
+
+
 # WU
 
 # DEFAULT_CONFIG = {

@@ -10,8 +10,8 @@ import keyboard as kb
 from datetime import datetime
 
 from src.common import config, utils
-from src.detection.detection import solve_auth, type_auth
 from src.common.vkeys import click
+from src.detection.detection import solve_auth, type_auth
 
 
 

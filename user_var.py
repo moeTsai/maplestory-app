@@ -28,5 +28,10 @@ DEFAULT_CONFIG = z_custom.DEFAULT_CONFIG
 
 LISTENER_CONFIG = z_custom.LISTENER_CONFIG
 
+# check if the BOT_TOKEN and CHAT_ID are set
+BOT_TOKEN = getattr(z_custom, 'BOT_TOKEN', None)
+CHAT_ID = getattr(z_custom, 'CHAT_ID', None)
+
+
 
 

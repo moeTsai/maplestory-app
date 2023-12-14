@@ -98,7 +98,6 @@ class Capture:
             tl, _ = utils.single_match(self.frame, MM_TL_TEMPLATE)
             _, br = utils.single_match(self.frame, MM_BR_TEMPLATE, (tl[0], tl[1], 300, 200))
             self.get_hp_bar()
-            print(1)
             br = (br[0], br[1])
 
             mm_tl = (
@@ -138,7 +137,7 @@ class Capture:
 
                     if not self.ready:
                         self.ready = True
-                    time.sleep(0.001)
+                    time.sleep(0.01)
 
     def get_hp_bar(self):
         _, level = utils.single_match(self.frame, LEVEL_TEMPLATE)
