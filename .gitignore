@@ -1,4 +1,8 @@
 *.png
+!assets/**/*.png
+
+
+
 .settings/controls
 z_custom.py
 z_custom.py
