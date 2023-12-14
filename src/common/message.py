@@ -40,13 +40,16 @@ def send_photo(np_array_img):
 
     :param np_array_img: the image to send.
     """
-    # Convert the NumPy array to a PIL Image
-    image = Image.fromarray(np.uint8(np_array_img))
+    import cv2
+    # Convert from BGR to RGB
+    rgb_image = cv2.cvtColor(np_array_img, cv2.COLOR_BGR2RGB)
+
+    # Convert the RGB image to a PIL Image
+    image = Image.fromarray(rgb_image)
 
     # Save the image to an in-memory file
     with io.BytesIO() as image_io:
         image.save(image_io, format='PNG')
-        
         image_bytes = image_io.getvalue()
 
         # Send the photo
