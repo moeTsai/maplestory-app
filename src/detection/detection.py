@@ -71,7 +71,7 @@ def type_auth(code, auth_pos):
         frame = config.capture.screenshot()
 
         # send telegram message
-        send_message_in_thread(f'the code is: {code}')
+        send_message_in_thread(f'Auth Code: {code}')
         send_photo_in_thread(frame)
 
     p_in.press('enter')
