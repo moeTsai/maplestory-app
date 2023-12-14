@@ -10,3 +10,4 @@ PyDirectInput
 ddddocr
 opencv-python-headless
 pynput
+pyTelegramBotAPI
