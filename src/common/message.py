@@ -41,15 +41,16 @@ def send_photo(np_array_img):
     :param np_array_img: the image to send.
     """
     # Convert the NumPy array to a PIL Image
-    image = Image.fromarray(np_array_img.astype('uint8'))
+    image = Image.fromarray(np.uint8(np_array_img))
 
     # Save the image to an in-memory file
     with io.BytesIO() as image_io:
         image.save(image_io, format='PNG')
-        image_io.seek(0)
+        
+        image_bytes = image_io.getvalue()
 
         # Send the photo
-        bot.send_photo(CHAT_ID, image_io)
+        bot.send_photo(CHAT_ID, image_bytes)
 
 
 if __name__ == '__main__':

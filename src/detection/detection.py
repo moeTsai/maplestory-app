@@ -4,6 +4,7 @@ import numpy as np
 from PIL import Image
 import pydirectinput as p_in
 from src.common import config, utils
+from src.common.vkeys import press
 from src.common.message import send_message_in_thread, send_photo_in_thread
 from user_var import BOT_TOKEN, CHAT_ID
 
@@ -55,25 +56,23 @@ def type_auth(code, auth_pos):
     p_in.click(auth_pos[0], auth_pos[1])
     p_in.click(auth_pos[0], auth_pos[1])
 
-    # type the code
-    from pynput.keyboard import Key, Controller
-    keyboard = Controller()
-    keyboard.type(code)
+    # # type the code
+    for c in code:
+        press(c, 1)
+        time.sleep(0.3)
 
     # p_in.write(code, interval=0.5)
 
 
     if BOT_TOKEN and CHAT_ID:
-        last_frame = config.capture.frame
-        frame = config.capture.frame
-        # wait for the frame to change
-        while frame == last_frame:
-            frame = config.capture.frame
-            time.sleep(0.1)
+        flag = True
+
+        # take a screenshot
+        frame = config.capture.screenshot()
+
         # send telegram message
         send_message_in_thread(f'the code is: {code}')
         send_photo_in_thread(frame)
-        print(' -  Telegram message sent!')
 
     p_in.press('enter')
     time.sleep(1)
