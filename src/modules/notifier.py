@@ -20,7 +20,7 @@ from src.detection.detection import solve_auth, type_auth
 #     ((60,130,180), (80, 148, 199)),
 # )
 AUTH_TEMPLATE = cv2.imread('assets/auth_template.png', 0)
-
+AUTH_ENTRY_TEMPLATE = cv2.imread('assets/auth_entry_template.png', 0)
 GIFT_TEMPLATE = cv2.imread('assets/gift_template.png', 0)
 
 # auth_filtered = utils.filter_color(cv2.imread('assets/auth_template.png'), AUTH_RANGES)
@@ -59,12 +59,13 @@ class Notifier:
                     time.sleep(1)
 
                 auth = utils.multi_match(frame, AUTH_TEMPLATE, threshold=0.8)
+                entry = utils.multi_match(frame, AUTH_ENTRY_TEMPLATE, threshold=0.8)
 
                 # found the auth save the auth
-                if auth:
+                if auth and entry:
                     print(" -  Auth event detected!")
                     cv2.imwrite('auth.png', frame)
-                    self._solve_auth(frame, auth[0])
+                    self._solve_auth(frame, auth[0], entry[0])
             time.sleep(0.1)
 
     def _click_gift(self, gift_pos):
@@ -75,7 +76,7 @@ class Notifier:
         click(gift_pos)
 
 
-    def _solve_auth(self, frame, auth_pos):
+    def _solve_auth(self, frame, auth_pos, entry_pos):
         """Solve the authentication event."""
         
         def filter_alphanumeric(text):
@@ -108,15 +109,16 @@ class Notifier:
         
         print(f' -  Auth code: {code}')
         code = filter_alphanumeric(code)
-        original, filtered = self.folder_check()
+
+        original = 'auth_data/original'
+        os.makedirs(original, exist_ok=True)
         
         current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         original_path = f'{original}/{current_time}__{code}.png'
-        # filtered_path = f'{filtered}/{current_time}__{code}.png'
 
         cv2.imwrite(original_path, cropped)
 
-        type_auth(code, tl)
+        type_auth(code, entry_pos)
 
         time.sleep(10)
         time.sleep(0.1)
@@ -124,34 +126,3 @@ class Notifier:
         # resume the program
         config.locked = False
     
-
-
-    def folder_check(self):
-        """
-        Check if the auth_data folder exists.
-        If not, create one.
-        
-        return: the path of the original and filtered folder.
-        """
-        
-        folder_path = 'auth_data'
-        if not os.path.exists(folder_path):
-            os.mkdir(folder_path)
-
-        original = folder_path + '/original'
-        if not os.path.exists(original):
-            os.mkdir(original)
-        
-        filtered = folder_path + '/filtered'
-
-        if not os.path.exists(filtered):
-            os.mkdir(filtered)
-
-        return original, filtered
-
-
-
-
-# save the image
-
-
