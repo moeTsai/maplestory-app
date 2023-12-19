@@ -111,11 +111,10 @@ class Bot():
         hp_fill(self.hp_percent_to_fill)
 
         # Reload user_var module to get the latest value of 'routine'
-        importlib.reload(importlib.import_module('user_var'))
-        from user_var import routine
+        user_var = importlib.reload(importlib.import_module('user_var'))
 
         # load the routine        
-        routine = importlib.import_module('src.routine.' + routine)
+        routine = importlib.import_module('src.routine.' + user_var.routine)
         routine._main()
  
         time.sleep(0.01)
