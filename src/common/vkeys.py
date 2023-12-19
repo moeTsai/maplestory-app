@@ -225,7 +225,7 @@ def press(key, n, down_time=0.05, up_time=0.1):
         time.sleep(up_time * (0.8 + 0.4 * random()))
 
 
-# @utils.run_if_enabled
+@utils.run_if_enabled
 def click(position, button='left'):
     """
     Simulate a mouse click with BUTTON at POSITION.

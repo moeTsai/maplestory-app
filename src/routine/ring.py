@@ -17,7 +17,7 @@ threshold = 0.95
 
 
 
-
+@utils.run_if_enabled
 def _main():
     """
     automatic ring routine
@@ -33,15 +33,17 @@ def _main():
     fight()
     out()
 
-
 def entry():
 
     npc_pos = utils.multi_match(config.capture.frame, npc, threshold=threshold)
-    while len(npc_pos) == 0:
+    while len(npc_pos) == 0 and config.enabled:
         print(' -  finding npc...')
         npc_pos = utils.multi_match(config.capture.frame, npc, threshold=threshold)
         time.sleep(0.1)
     
+    if not config.enabled:
+        return
+
     print(f' -  npc detected at {npc_pos}')
     click(npc_pos[0], 1)
     time.sleep(0.5)
@@ -56,13 +58,16 @@ def entry():
     press('down', 1)
     time.sleep(0.25)
     press(interact, 1)
-    
+
 def wait_for_request():
     npc_pos = utils.multi_match(config.capture.frame, npc, threshold=threshold)
-    while len(npc_pos) == 0:
+    while len(npc_pos) == 0 and config.enabled:
         print(' -  finding request...')
         npc_pos = utils.multi_match(config.capture.frame, npc, threshold=threshold)
         time.sleep(0.5)
+    
+    if not config.enabled:
+        return
     
     press(interact, 1)
     time.sleep(0.5)

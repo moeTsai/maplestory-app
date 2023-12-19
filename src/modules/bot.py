@@ -13,11 +13,11 @@ from src.common.vkeys import press, click, key_down, key_up
 from src.common.interfaces import Configurable
 
 
-ROPES = [
-    (0.756, 0.577),
-    (0.513, 0.609),
-    (0.416, 0.796),
-]
+# ROPES = [
+#     (0.756, 0.577),
+#     (0.513, 0.609),
+#     (0.416, 0.796),
+# ]
 
 
 
@@ -114,5 +114,3 @@ class Bot():
         routine._main()
  
         time.sleep(0.01)
-
-        pass
