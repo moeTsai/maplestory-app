@@ -105,7 +105,6 @@ class Bot():
     def custom_function(self):
         """Custom function to be executed by the bot."""
 
-        from src.routine import daemon_slime
         from src.common.utils_game import hp_fill
         
         hp_fill(self.hp_percent_to_fill)
