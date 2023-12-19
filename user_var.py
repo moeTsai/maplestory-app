@@ -1,4 +1,5 @@
-import z_custom
+import importlib
+
 
 #################################
 #    Editable User Variables    #
@@ -9,6 +10,9 @@ current_routines = {
     1: 'daemon_slime',
     2: 'ring',
 }
+
+# dynamic import z_custom
+z_custom = importlib.reload(importlib.import_module('z_custom'))
 routine_index = getattr(z_custom, 'routine_index', 1)
 
 

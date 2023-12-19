@@ -1,16 +1,17 @@
-""""""
+"""base of the routine."""
 
 import threading
 import time
-import cv2
-import inspect
+# import cv2
+# import inspect
 import importlib
-import traceback
-from os.path import splitext, basename
-from src.common import config
 import user_var
+
+# import traceback
+# from os.path import splitext, basename
+from src.common import config
 from src.common.vkeys import press, click, key_down, key_up
-from src.common.interfaces import Configurable
+# from src.common.interfaces import Configurable
 
 
 # ROPES = [
@@ -109,8 +110,12 @@ class Bot():
         
         hp_fill(self.hp_percent_to_fill)
 
+        # Reload user_var module to get the latest value of 'routine'
+        importlib.reload(importlib.import_module('user_var'))
+        from user_var import routine
+
         # load the routine        
-        routine = importlib.import_module('src.routine.' + user_var.routine)
+        routine = importlib.import_module('src.routine.' + routine)
         routine._main()
  
         time.sleep(0.01)

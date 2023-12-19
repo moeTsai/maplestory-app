@@ -12,8 +12,6 @@ attact = DEFAULT_CONFIG['Attack']
 # import pydirectinput as p_in
 # p_in.PAUSE = 0.01
 
-
-
 SLIME_TEMPLATE_LF = cv2.imread('assets/routine/daemon_slime/daemon_left.png', 0)
 SLIME_TEMPLATE_RT = cv2.imread('assets/routine/daemon_slime/daemon_right.png', 0)
 
