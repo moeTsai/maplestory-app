@@ -6,7 +6,6 @@ import cv2
 import inspect
 import importlib
 import traceback
-import importlib
 from os.path import splitext, basename
 from src.common import config
 import user_var
@@ -111,12 +110,9 @@ class Bot():
         
         hp_fill(self.hp_percent_to_fill)
 
-        daemon_slime._main()
-
         # load the routine        
-        # routine = importlib.import_module(user_var.routine)
-
-        # routine._main()
+        routine = importlib.import_module('src.routine.' + user_var.routine)
+        routine._main()
  
         time.sleep(0.01)
 
