@@ -12,6 +12,8 @@ interact = DEFAULT_CONFIG['Interact']
 buff2 = DEFAULT_CONFIG['Buff2']
 
 npc = cv2.imread('assets/routine/ring/npc.png', 0)
+fight_req = cv2.imread('assets/routine/ring/fight_request.png', 0)
+tp = cv2.imread('assets/routine/ring/tp.png', 0)
 
 threshold = 0.95
 
@@ -32,6 +34,7 @@ def _main():
     wait_for_request()
     fight()
     out()
+    time.sleep(10)
 
 def entry():
 
@@ -45,12 +48,8 @@ def entry():
         return
 
     print(f' -  npc detected at {npc_pos}')
-    click(npc_pos[0], 1)
-    time.sleep(0.5)
-    press('down', 1)
-    time.sleep(0.25)
-    press(interact, 1)
-    time.sleep(0.25)
+    click(npc_pos[0])
+    time.sleep(2)
     press('down', 1)
     time.sleep(0.25)
     press('down', 1)
@@ -58,12 +57,15 @@ def entry():
     press('down', 1)
     time.sleep(0.25)
     press(interact, 1)
+    time.sleep(0.25)
+    press('down', 1)
+    time.sleep(0.25)
 
 def wait_for_request():
-    npc_pos = utils.multi_match(config.capture.frame, npc, threshold=threshold)
-    while len(npc_pos) == 0 and config.enabled:
+    fight_req_pos = utils.multi_match(config.capture.frame, fight_req, threshold=threshold)
+    while len(fight_req_pos) == 0 and config.enabled:
         print(' -  finding request...')
-        npc_pos = utils.multi_match(config.capture.frame, npc, threshold=threshold)
+        fight_req_pos = utils.multi_match(config.capture.frame, fight_req, threshold=threshold)
         time.sleep(0.5)
     
     if not config.enabled:
@@ -77,10 +79,38 @@ def wait_for_request():
 
 def fight():
     # TODO
+    entry_time = time.time()
+    summon_time = time.time()
+    while time.time() - entry_time < 605:
+        if not config.enabled:
+            time.sleep(0.1)
+            continue
+        print(' -  fighting...')
+        if time.time() - summon_time > 30:
+            summon()
+        press(attact, 1)
+    pass
+
+def summon():
+    # TODO
     pass
 
 def out():
-    # TODO
+    npc_pos = utils.multi_match(config.capture.frame, npc, threshold=threshold)
+    while len(npc_pos) == 0 and config.enabled:
+        print(' -  finding npc...(out)')
+        npc_pos = utils.multi_match(config.capture.frame, npc, threshold=threshold)
+        time.sleep(0.1)
+    
+    if not config.enabled:
+        return
+
+    print(f' -  npc detected at {npc_pos}')
+    click(npc_pos[0])
+    time.sleep(2)
+    press(interact, 1)
+    time.sleep(2)
+    
     pass
 
 
