@@ -6,6 +6,7 @@ import ctypes
 import mss
 import mss.windows
 import numpy as np
+import user_var
 from src.common import config, utils
 from ctypes import wintypes
 
@@ -13,6 +14,8 @@ user32 = ctypes.windll.user32
 user32.SetProcessDPIAware()
 
 
+
+MAPLE_WINDOW_NAME = user_var.MAPLE_WINDOW_NAME
 # The distance between the top of the minimap and the top of the screen
 MINIMAP_TOP_BORDER = 0
 
@@ -74,7 +77,8 @@ class Capture:
         while True:
             # Calibrate screen capture
             # handle = user32.FindWindowW(None, 'MapleStory')
-            handle = user32.FindWindowW(None, '[防爆模式] 楓葉幻境')
+
+            handle = user32.FindWindowW(None, MAPLE_WINDOW_NAME)
 
             rect = wintypes.RECT()
             
