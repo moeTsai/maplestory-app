@@ -32,6 +32,8 @@ repeat_times = 0
 DEFAULT_CONFIG = z_custom.DEFAULT_CONFIG
 
 LISTENER_CONFIG = z_custom.LISTENER_CONFIG
+
+MAPLE_WINDOW_NAME = z_custom.MAPLE_WINDOW_NAME
 ################################
 
 # check if the BOT_TOKEN and CHAT_ID are set

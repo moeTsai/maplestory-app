@@ -4,7 +4,7 @@ packaging
 mss
 numpy
 Pillow
-pywin32
+pywin32==228
 keyboard
 PyDirectInput
 ddddocr
