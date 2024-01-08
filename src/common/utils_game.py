@@ -14,7 +14,11 @@ def reset_keys(keys):
 def get_hp_location(percentage):
     dozens = percentage//10 * 10
     return config.HPs_X[dozens], config.HPs_Y
-    
+
+def get_mp_location(percentage):
+    dozens = percentage//10 * 10
+    return config.MPs_X[dozens], config.MPs_Y    
+
 def hp_record():
     """
     check the hp color and record it.
@@ -33,6 +37,25 @@ def hp_record():
     config.locked = False
     print(' -  HP color recorded')
 
+def mp_record():
+    """
+    check the mp color and record it.
+    """
+
+    color_temp = {}
+    for i in range(0, 101, 10):
+        color_L = get_mp_location(i)
+        click((color_L[0], color_L[1]))
+        color = config.capture.frame[color_L[1], color_L[0]]
+        color_temp[i] = color
+        # print(f' -  MP {i} color: {color}')
+        time.sleep(0.3)
+    
+    config.MP_COLOR = color_temp
+    config.locked = False
+    print(' -  MP color recorded')
+
+
 def hp_fill(percentage):
     """
     Fill the hp if below the given percentage.
@@ -45,7 +68,6 @@ def hp_fill(percentage):
     #     config.locked = True
     #     return
     
-    # hp_color = config.HP_COLOR
     hp_filler = user_var.DEFAULT_CONFIG['Hp potion']
     
     color_L = get_hp_location(percentage)
@@ -57,6 +79,21 @@ def hp_fill(percentage):
         print(f' -  Filling HP from {percentage}%')
         press(hp_filler, 1)
 
+def mp_fill(percentage):
+    """
+    Fill the mp if below the given percentage.
+    
+    :param percentage: The percentage of mp to fill.
+    """
+    mp_filler = user_var.DEFAULT_CONFIG['Mp potion']
+    
+    color_L = get_mp_location(percentage)
+    # print(f' -  MP {percentage} color: {config.capture.frame[color_L[1], color_L[0]]}')
+    # click((color_L[0], color_L[1]))
+    # print(f' -  MP {percentage} color: {mp_color[percentage]}')
+    if all(config.capture.frame[color_L[1], color_L[0]] == [177, 177, 177, 255]):
+        print(f' -  Filling MP from {percentage}%')
+        press(mp_filler, 1)
 
 @utils.run_if_enabled
 def climb_robe(robe_pos, stay=False):

@@ -34,6 +34,7 @@ class Bot():
         self.repetative = user_var.repetative
         self.repeat_times = user_var.repeat_times
         self.hp_percent_to_fill = user_var.hp_percent_to_fill
+        self.mp_percent_to_fill = user_var.mp_percent_to_fill
         
         self.config = config.bot
         self.thread = threading.Thread(target=self._main)
@@ -106,9 +107,10 @@ class Bot():
     def custom_function(self):
         """Custom function to be executed by the bot."""
 
-        from src.common.utils_game import hp_fill
+        from src.common.utils_game import hp_fill, mp_fill
         
         hp_fill(self.hp_percent_to_fill)
+        mp_fill(self.mp_percent_to_fill)
 
         # Reload user_var module to get the latest value of 'routine'
         user_var = importlib.reload(importlib.import_module('user_var'))

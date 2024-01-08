@@ -19,7 +19,8 @@ routine_index = getattr(z_custom, 'routine_index', 1)
 routine = current_routines[routine_index]
 
 
-hp_percent_to_fill = 50
+hp_percent_to_fill = 40
+mp_percent_to_fill = 20
 
 # if the routine is repetative
 repetative = True

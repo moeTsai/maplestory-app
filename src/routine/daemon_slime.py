@@ -68,7 +68,9 @@ def attact_slime(direction_dist):
 
     too_far = 300
     facing = config.real_player_facing
+    press(DEFAULT_CONFIG['Pick up'], 1)
     if direction_dist > too_far:
+
         key_down('right')
         # time.sleep(0.1)
     elif direction_dist < -too_far:

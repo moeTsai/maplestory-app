@@ -13,9 +13,8 @@ from ctypes import wintypes
 user32 = ctypes.windll.user32
 user32.SetProcessDPIAware()
 
-
-
 MAPLE_WINDOW_NAME = user_var.MAPLE_WINDOW_NAME
+
 # The distance between the top of the minimap and the top of the screen
 MINIMAP_TOP_BORDER = 0
 
@@ -52,6 +51,7 @@ class Capture:
         config.capture = self
         self.frame = None
         self.sct = None
+        self.hwnds = []
         self.window = {
             'left': 0,
             'top': 0,
@@ -65,6 +65,10 @@ class Capture:
 
     def start(self):
         """Starts this Capture's thread."""
+        global MAPLE_WINDOW_NAME
+
+        print('\n[-] Get hwnd of all the windows')
+        self.hwnds = self.get_hwnds()
 
         print('\n[-] Started video capture')
         self.thread.start()
@@ -76,9 +80,10 @@ class Capture:
         """
         while True:
             # Calibrate screen capture
-            # handle = user32.FindWindowW(None, 'MapleStory')
 
-            handle = user32.FindWindowW(None, MAPLE_WINDOW_NAME)
+            # handle = user32.FindWindowW(None, MAPLE_WINDOW_NAME)
+            # self.switch_hwnd()
+            handle = self.hwnds[0]
 
             rect = wintypes.RECT()
             
@@ -101,7 +106,10 @@ class Capture:
             cv2.imwrite('map.png', self.frame)
             tl, _ = utils.single_match(self.frame, MM_TL_TEMPLATE)
             _, br = utils.single_match(self.frame, MM_BR_TEMPLATE, (tl[0], tl[1], 300, 200))
+            # get the location of the hp bar and mp bar
             self.get_hp_bar()
+            self.get_mp_bar()
+
             br = (br[0], br[1])
 
             mm_tl = (
@@ -166,6 +174,30 @@ class Capture:
             100: (hp100_location[0])
         }
         config.HPs_Y = hp0_location[1]
+    
+    def get_mp_bar(self):
+        _, level = utils.single_match(self.frame, LEVEL_TEMPLATE)
+
+        from src.common import config
+
+        config.MP0_LOCATION = (level[0] + 300, level[1] - 5)
+        config.MP100_LOCATION = (level[0] + 380, level[1] - 5)
+        mp0_location = config.MP0_LOCATION
+        mp100_location = config.MP100_LOCATION
+        config.MPs_X = {
+            0  : (mp0_location[0]),
+            10 : (mp0_location[0] * 9 + mp100_location[0]    )//10,
+            20 : (mp0_location[0] * 8 + mp100_location[0] * 2)//10,
+            30 : (mp0_location[0] * 7 + mp100_location[0] * 3)//10,
+            40 : (mp0_location[0] * 6 + mp100_location[0] * 4)//10,
+            50 : (mp0_location[0] * 5 + mp100_location[0] * 5)//10,
+            60 : (mp0_location[0] * 4 + mp100_location[0] * 6)//10,
+            70 : (mp0_location[0] * 3 + mp100_location[0] * 7)//10,
+            80 : (mp0_location[0] * 2 + mp100_location[0] * 8)//10,
+            90 : (mp0_location[0]     + mp100_location[0] * 9)//10,
+            100: (mp100_location[0])
+        }
+        config.MPs_Y = mp0_location[1]
 
     def screenshot(self, delay=1):
         """Take a screenshot of the game window."""
@@ -175,3 +207,24 @@ class Capture:
             print(f'\n[!] Error while taking screenshot, retrying in {delay} second'
                   + ('s' if delay != 1 else ''))
             time.sleep(delay)
+
+    def get_hwnds(self):
+        """Get the hwnd of all the windows."""
+        EnumWindowsProc = ctypes.WINFUNCTYPE(ctypes.c_bool, wintypes.HWND, ctypes.c_int)
+        def enum_windows_proc(hwnd, lParam):
+            length = ctypes.windll.user32.GetWindowTextLengthW(hwnd)
+            buff = ctypes.create_unicode_buffer(length + 1)
+            ctypes.windll.user32.GetWindowTextW(hwnd, buff, length + 1)
+
+            if buff.value == MAPLE_WINDOW_NAME:
+                self.hwnds.append(hwnd)
+                print(f"hwnd: {hwnd}, name: {buff.value}")
+
+            return True
+        ctypes.windll.user32.EnumWindows(EnumWindowsProc(enum_windows_proc), 0)
+        return self.hwnds
+
+    def switch_hwnd(self):
+        self.hwnds.append(self.hwnds.pop(0))
+        print(f'switched: {self.hwnds}')
+        return self.hwnds[0]

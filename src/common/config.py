@@ -31,6 +31,11 @@ HP100_LOCATION = None
 HP_COLOR = None
 HPs_X = None
 HPs_Y = None
+MP0_LOCATION = None
+MP100_LOCATION = None
+MP_COLOR = None
+MPs_X = None
+MPs_Y = None
 
 
 last_buff_time = None
