@@ -11,13 +11,13 @@ from random import random
 
 def run_if_enabled(function):
     """
-    Decorator for functions that should only run if the bot is enabled.
+    Decorator for functions that should only run if the bot is enabled and not locked.
     :param function:    The function to decorate.
     :return:            The decorated function.
     """
 
     def helper(*args, **kwargs):
-        if config.enabled:
+        if config.enabled and not config.locked:
             return function(*args, **kwargs)
     return helper
 
