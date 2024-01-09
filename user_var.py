@@ -9,6 +9,7 @@ import importlib
 current_routines = {
     1: 'daemon_slime',
     2: 'ring',
+    3: 'ring_challenger',
 }
 
 # dynamic import z_custom
