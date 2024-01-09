@@ -56,6 +56,7 @@ def _main():
     
     entry()
     wait_for_request()
+    send_photo_in_thread(frame)
     fight()
     expfix()
     send_photo_in_thread(frame)
