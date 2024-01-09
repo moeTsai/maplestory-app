@@ -18,6 +18,7 @@ tp = DEFAULT_CONFIG['Tp']
 jump = DEFAULT_CONFIG['Jump']
 heal = DEFAULT_CONFIG['Heal']
 
+join = cv2.imread('assets/routine/ring/join.png', 0)
 npc = cv2.imread('assets/routine/ring/npc.png', 0)
 fight_req = cv2.imread('assets/routine/ring/fight_request.png', 0)
 tomb = cv2.imread('assets/routine/ring/tomb.png', 0)
@@ -48,8 +49,8 @@ def _main():
         print(' -  No frame captured')
         return
     
-    # entry()
-    # wait_for_request()
+    entry()
+    wait_for_request()
     fight()
     out()
     time.sleep(10)
@@ -71,29 +72,34 @@ def entry():
 
     print(f' -  npc detected at {npc_pos}')
     click(npc_pos[0])
-    time.sleep(2)
-    press('down', 1)
-    time.sleep(0.25)
-    press('down', 1)
-    time.sleep(0.25)
-    press('down', 1)
-    time.sleep(0.25)
-    press(interact, 1)
-    time.sleep(0.25)
-    press('down', 1)
-    time.sleep(0.25)
+    time.sleep(1)
+    
+    while True:
+        join_pos = utils.multi_match(cap.frame, join, threshold=threshold)
+        time.sleep(1)
+        if len(join_pos) > 0:
+            join_pos = join_pos[0]
+            click((join_pos[0],join_pos[1] + 25))
+            time.sleep(1)
+            press("Enter",1)
+            break
+        press("Esc",1)
+        time.sleep(1)
+        click(npc_pos[0])
+        time.sleep(1)
+    # time.sleep(0.25)
+    # press('down', 1)
+    # time.sleep(0.25)
+    # press('down', 1)
+    # time.sleep(0.25)
+    # press(interact, 1)
+    # time.sleep(0.25)
+    # press('down', 1)
+    # time.sleep(0.25)
 
 def wait_for_request():
-    fight_req_pos = utils.multi_match(cap.frame, fight_req, threshold=threshold)
-    while len(fight_req_pos) == 0 and config.enabled:
-        print(' -  finding request...')
-        fight_req_pos = utils.multi_match(cap.frame, fight_req, threshold=threshold)
-        time.sleep(0.5)
-    
     if not config.enabled:
         return
-    
-    press(interact, 1)
     time.sleep(0.5)
     press(buff1, 2)
     time.sleep(0.5)
@@ -141,6 +147,7 @@ def check_dead():
     def walk_out(down = True):
         print('...walking out...')
         time.sleep(2)
+        key_up('left')
         key_down('right')
         count = 0
         while len(utils.multi_match(cap.frame, TP_TEMPLATE, threshold=threshold)) > 0 or count > 300:
@@ -148,7 +155,7 @@ def check_dead():
             key_down('right')
             press('up', 1)
             time.sleep(0.01)
-                
+
         key_up('right')
         if down:
             switch_alt()
@@ -157,30 +164,31 @@ def check_dead():
             time.sleep(0.3)
             press(heal, 2)
             switch_alt()
-            key_down('down')
-            for _ in range(5):
+            keydown('down')
+            for  in range(5):
                 press(jump, 1)
                 time.sleep(0.3)
             key_up('down')
 
         time.sleep(1)
-    
+
     if not alt_has_died:
         alt_has_died = True
         switch_alt()
-        time.sleep(0.2)
+        time.sleep(0.5)
         dead_pos = utils.multi_match(cap.frame, tomb, threshold=threshold)
         if len(dead_pos) > 0:
-            print(' -  dead detected')
+            # print(' -  dead detected')
             dead_pos = dead_pos[0]
-            click((dead_pos[0] + 100, dead_pos[1] + 65))
+            print(f' -  dead at {dead_pos}')
+            click((cap.window['left'] + dead_pos[0] + 100, cap.window['top'] + dead_pos[1] + 65))
             walk_out(down = False)
         switch_alt()
 
     dead_pos = utils.multi_match(cap.frame, tomb, threshold=threshold)
     if len(dead_pos) > 0:
         dead_pos = dead_pos[0]
-        click((dead_pos[0] + 100, dead_pos[1] + 65))
+        click((cap.window['left'] + dead_pos[0] + 100, cap.window['top'] + dead_pos[1] + 65))
         walk_out()
         return True
 
@@ -268,8 +276,8 @@ def summon():
         return
     summon_pos = summon_pos[0]
     print(f' -  summon detected at {summon_pos}')
-    monster_pos = (summon_pos[0], summon_pos[1]+ 43)
-    skill_pos = (summon_pos[0] + 70, summon_pos[1] + 43)
+    monster_pos = (summon_pos[0] + 10, summon_pos[1]+ 52)
+    skill_pos = (summon_pos[0] + 90, summon_pos[1] + 52)
     click(monster_pos)
     press('f5', 4)
     time.sleep(0.1)
