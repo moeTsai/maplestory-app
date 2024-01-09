@@ -29,7 +29,7 @@ BOT_TEMPLATE_LF = cv2.imread('assets/routine/ring/bot_lf.png', 0)
 BOT_TEMPLATE_RT = cv2.imread('assets/routine/ring/bot_rt.png', 0)
 HORSE_TEMPLATE_LF = cv2.imread('assets/routine/ring/horse_lf.png', 0)
 HORSE_TEMPLATE_RT = cv2.imread('assets/routine/ring/horse_rt.png', 0)
-SUMMON_TEMPLATE = cv2.imread('assets/routine/ring/summon_loc.png', 0)
+SUMMON_TEMPLATE = cv2.imread('assets/routine/ring/summon_loc_2.png', 0)
 TP_TEMPLATE = cv2.imread('assets/routine/ring/tp.png', 0)
 
 REAL_PLAYER_TEMPLATE = cv2.imread('assets/routine/ring/real_player.png', 0)

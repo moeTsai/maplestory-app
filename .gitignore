@@ -1,10 +1,7 @@
 *.png
 !assets/**/*.png
 
-
-
 .settings/controls
-z_custom.py
 z_custom.py
 
 # Byte-compiled / optimized / DLL files
@@ -168,4 +165,3 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 test*.py
-assets/routine/ring/summon_loc.png
