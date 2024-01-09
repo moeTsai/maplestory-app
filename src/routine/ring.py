@@ -59,6 +59,7 @@ def _main():
     send_photo_in_thread(frame)
     fight()
     expfix()
+    alt_expfix()
     send_photo_in_thread(frame)
     out()
     time.sleep(0.02)
@@ -67,14 +68,19 @@ def _main():
 
 def expfix():
     print(' -  exp fixing...')
-    time.sleep(0.5)
+    time.sleep(0.3)
     press('enter', 1)
-    time.sleep(0.5)
+    time.sleep(0.3)
     press('up', 1)
-    time.sleep(0.5)
+    time.sleep(0.3)
     press('enter', 1)
-    time.sleep(0.5)
+    time.sleep(0.3)
     press('enter', 1)
+
+def alt_expfix():
+    switch_alt()
+    expfix()
+    switch_alt()
 
 def entry():
     global alt_has_died
