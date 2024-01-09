@@ -18,6 +18,7 @@ tp = DEFAULT_CONFIG['Tp']
 jump = DEFAULT_CONFIG['Jump']
 heal = DEFAULT_CONFIG['Heal']
 
+join = cv2.imread('assets/routine/ring/join.png', 0)
 npc = cv2.imread('assets/routine/ring/npc.png', 0)
 fight_req = cv2.imread('assets/routine/ring/fight_request.png', 0)
 tomb = cv2.imread('assets/routine/ring/tomb.png', 0)
@@ -74,7 +75,8 @@ def entry():
         return
 
     print(f' -  npc detected at {npc_pos}')
-    click(npc_pos[0])
+    npc_pos = (npc_pos[0][0] + cap.window['left'], npc_pos[0][1] + cap.window['top'])
+    click(npc_pos)
     time.sleep(1)
     
     while True:
@@ -82,13 +84,14 @@ def entry():
         time.sleep(1)
         if len(join_pos) > 0:
             join_pos = join_pos[0]
-            click((join_pos[0],join_pos[1] + 25))
+            join_pos = (join_pos[0] + cap.window['left'], join_pos[1] + cap.window['top'])
+            click(join_pos)
             time.sleep(1)
             press("Enter",1)
             break
         press("Esc",1)
         time.sleep(1)
-        click(npc_pos[0])
+        click(npc_pos)
         time.sleep(1)
     # time.sleep(0.25)
     # press('down', 1)
