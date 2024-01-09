@@ -18,7 +18,6 @@ tp = DEFAULT_CONFIG['Tp']
 jump = DEFAULT_CONFIG['Jump']
 heal = DEFAULT_CONFIG['Heal']
 
-join = cv2.imread('assets/routine/ring/join.png', 0)
 npc = cv2.imread('assets/routine/ring/npc.png', 0)
 fight_req = cv2.imread('assets/routine/ring/fight_request.png', 0)
 tomb = cv2.imread('assets/routine/ring/tomb.png', 0)
@@ -35,6 +34,11 @@ TP_TEMPLATE = cv2.imread('assets/routine/ring/tp.png', 0)
 REAL_PLAYER_TEMPLATE = cv2.imread('assets/routine/ring/real_player.png', 0)
 is_alt = False
 alt_has_died = False
+
+## clear console
+CURCOR_UP = '\033[1A'
+CLEAR = '\x1b[1A'
+CLEAR_LINE = CURCOR_UP + CLEAR
 
 
 
@@ -53,10 +57,9 @@ def _main():
     wait_for_request()
     fight()
     out()
-    time.sleep(10)
+    time.sleep(2)
 
     # fight()
-
 
 def entry():
     global alt_has_died
@@ -106,6 +109,7 @@ def wait_for_request():
     press(buff2, 2)
     time.sleep(10)
 
+
 def fight():
     # TODO
     entry_time = time.time()
@@ -121,24 +125,28 @@ def fight():
         if alt_time is None:
             alt_time = time.time()
             alt_inting()
-        elif time.time() - dead_time > 5:
+        elif time.time() - dead_time > 10:
             dead_time = time.time()
             print(' -  dead checking...')
             if check_dead():
                 buff_time = None
+                print('buff time reset')
         elif time.time() - alt_time > 60:
             alt_time = time.time()
             print(' -  active alt')
+            key_up('left')
             alt_active()
-        if time.time() - summon_time > 30:
+        if time.time() - summon_time > 13:
             summon_time = time.time()
             print(' -  summoning...')
             summon()
         if not buff_time or time.time() - buff_time > 120:
             buff_time = time.time()
             print(' -  buffing...')
-            time.sleep(1)
+            time.sleep(0.5)
             press(buff2, 1)
+            time.sleep(1)
+            press(buff1, 1)
         attack_monster()
     # time.sleep(0.1)
 
@@ -155,7 +163,7 @@ def check_dead():
             key_down('right')
             press('up', 1)
             time.sleep(0.01)
-
+                
         key_up('right')
         if down:
             switch_alt()
@@ -164,24 +172,24 @@ def check_dead():
             time.sleep(0.3)
             press(heal, 2)
             switch_alt()
-            keydown('down')
-            for  in range(5):
+            key_down('down')
+            for _ in range(5):
                 press(jump, 1)
                 time.sleep(0.3)
             key_up('down')
 
         time.sleep(1)
-
+    
     if not alt_has_died:
-        alt_has_died = True
         switch_alt()
         time.sleep(0.5)
         dead_pos = utils.multi_match(cap.frame, tomb, threshold=threshold)
         if len(dead_pos) > 0:
             # print(' -  dead detected')
+            alt_has_died = True
+            print(' -  alt has died')
             dead_pos = dead_pos[0]
-            print(f' -  dead at {dead_pos}')
-            click((cap.window['left'] + dead_pos[0] + 100, cap.window['top'] + dead_pos[1] + 65))
+            click((cap.window['left'] + dead_pos[0] + 100, cap.window['top'] + dead_pos[1] + 65))    
             walk_out(down = False)
         switch_alt()
 
@@ -230,10 +238,13 @@ def alt_out():
 
     print(f' -  npc detected at {npc_pos}')
     time.sleep(0.2)
+    npc_pos = npc_pos[0]
     click((cap.window['left'] + npc_pos[0], cap.window['top'] + npc_pos[1]))
     time.sleep(0.5)
+    press('enter', 1)
+    time.sleep(0.2)
     press(interact, 1)
-    time.sleep(2)
+    time.sleep(1)
 
     switch_alt()
 
@@ -266,6 +277,8 @@ def attack_monster():
 
     print(f' -  Next monster at player + {next_mon_dir}')
 
+    # print(CLEAR_LINE * 2, end='')
+
     attact_monster(next_mon_dir)
 
 def summon():
@@ -276,8 +289,8 @@ def summon():
         return
     summon_pos = summon_pos[0]
     print(f' -  summon detected at {summon_pos}')
-    monster_pos = (summon_pos[0] + 10, summon_pos[1]+ 52)
-    skill_pos = (summon_pos[0] + 90, summon_pos[1] + 52)
+    monster_pos = (cap.window['left'] + summon_pos[0], cap.window['top'] + summon_pos[1]+ 43)
+    skill_pos = (cap.window['left'] + summon_pos[0] + 70, cap.window['top'] + summon_pos[1] + 43)
     click(monster_pos)
     press('f5', 4)
     time.sleep(0.1)
@@ -303,8 +316,10 @@ def out():
     npc_pos = npc_pos[0]
     click((cap.window['left'] + npc_pos[0], cap.window['top'] + npc_pos[1]))
     time.sleep(0.5)
+    press('enter', 1)
+    time.sleep(0.2)
     press(interact, 1)
-    time.sleep(2)
+    time.sleep(1)
     alt_out()
     
     pass
