@@ -225,7 +225,6 @@ def alt_active():
     time.sleep(0.1)
     press(attact, 2)
     switch_alt()
-    pass
 
 def alt_out():
     switch_alt()
@@ -241,12 +240,13 @@ def alt_out():
 
     print(f' -  npc detected at {npc_pos}')
     time.sleep(0.2)
-    npc_pos = npc_pos[0]
-    click((cap.window['left'] + npc_pos[0], cap.window['top'] + npc_pos[1]))
+    npc_pos = (npc_pos[0][0] + cap.window['left'], npc_pos[0][1] + cap.window['top'])
+    
+    click(npc_pos)
     time.sleep(0.5)
     press('enter', 1)
     time.sleep(0.2)
-    press(interact, 1)
+    press('enter', 1)
     time.sleep(1)
 
     switch_alt()
@@ -321,11 +321,9 @@ def out():
     time.sleep(0.5)
     press('enter', 1)
     time.sleep(0.2)
-    press(interact, 1)
+    press('enter', 1)
     time.sleep(1)
     alt_out()
-    
-    pass
 
 def attact_monster(direction_dist):
     """Attack the slime considering direction_dist."""
