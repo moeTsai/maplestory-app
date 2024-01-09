@@ -124,7 +124,7 @@ def fight():
     buff_time = None
     alt_time = None
     alt_time = time.time()
-    while time.time() - entry_time < 605:
+    while time.time() - entry_time < 601:
         if not config.enabled:
             time.sleep(0.1)
             continue
