@@ -314,7 +314,7 @@ def out():
     time.sleep(0.5)
     press('enter', 1)
     time.sleep(0.2)
-    press(interact, 1)
+    press('enter', 1)
     time.sleep(1)
     alt_out()
     
