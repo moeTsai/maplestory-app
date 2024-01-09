@@ -394,7 +394,7 @@ def switch_alt():
         click((left + 50, top + 40))
     else:
         is_alt = True
-        click((left + 50, top + 766))
+        click((left + 70, top + 766))
 
     
     # while (left, top) == (cap.window['left'], cap.window['top']):
