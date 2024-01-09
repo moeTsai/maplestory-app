@@ -57,7 +57,7 @@ def _main():
     wait_for_request()
     fight()
     out()
-    time.sleep(2)
+    time.sleep(0.02)
 
     # fight()
 
