@@ -225,6 +225,7 @@ class Capture:
         return self.hwnds
 
     def switch_hwnd(self):
-        self.hwnds.append(self.hwnds.pop(0))
+        self.hwnds.append(self.hwnds.pop(0))        
+        self.calibrated = False
         print(f'switched: {self.hwnds}')
         return self.hwnds[0]

@@ -69,6 +69,8 @@ class Bot():
         if self.repetative:
             repeat_times = -1
 
+        # config.capture.switch_hwnd()
+
         while True:
             # not enabled, sleep
             if config.enabled and not config.locked:
@@ -118,5 +120,6 @@ class Bot():
         # load the routine        
         routine = importlib.import_module('src.routine.' + user_var.routine)
         routine._main()
+        # time.sleep(1)
  
         time.sleep(0.01)

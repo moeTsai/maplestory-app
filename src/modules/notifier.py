@@ -23,6 +23,7 @@ AUTH_TEMPLATE = cv2.imread('assets/auth_template.png', 0)
 AUTH_ENTRY_TEMPLATE = cv2.imread('assets/auth_entry_template.png', 0)
 GIFT_TEMPLATE = cv2.imread('assets/gift_template.png', 0)
 
+
 # auth_filtered = utils.filter_color(cv2.imread('assets/auth_template.png'), AUTH_RANGES)
 # AUTH_TEMPLATE = cv2.cvtColor(auth_filtered, cv2.COLOR_BGR2GRAY)
 
