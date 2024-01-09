@@ -5,6 +5,7 @@ import time
 from src.common import config, utils
 from user_var import DEFAULT_CONFIG
 from src.common.vkeys import press, click, key_down, key_up
+from src.common.message import send_message_in_thread, send_photo_in_thread
 from src.common.utils_game import reset_keys
 
 
@@ -58,6 +59,7 @@ def _main():
     wait_for_request()
     fight()
     expfix()
+    send_photo_in_thread(frame)
     out()
     time.sleep(0.02)
 
