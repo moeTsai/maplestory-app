@@ -68,13 +68,13 @@ def _main():
 
 def expfix():
     print(' -  exp fixing...')
-    time.sleep(0.5)
+    time.sleep(0.3)
     press('enter', 1)
-    time.sleep(0.5)
+    time.sleep(0.3)
     press('up', 1)
-    time.sleep(0.5)
+    time.sleep(0.3)
     press('enter', 1)
-    time.sleep(0.5)
+    time.sleep(0.3)
     press('enter', 1)
 
 def alt_expfix():
