@@ -57,10 +57,22 @@ def _main():
     entry()
     wait_for_request()
     fight()
+    expfix()
     out()
-    time.sleep(2)
+    time.sleep(0.02)
 
     # fight()
+
+def expfix():
+    print(' -  exp fixing...')
+    time.sleep(0.5)
+    press('enter', 1)
+    time.sleep(0.5)
+    press('up', 1)
+    time.sleep(0.5)
+    press('enter', 1)
+    time.sleep(0.5)
+    press('enter', 1)
 
 def entry():
     global alt_has_died
