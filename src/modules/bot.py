@@ -74,6 +74,11 @@ class Bot():
         while True:
             # not enabled, sleep
             if config.enabled and not config.locked:
+
+                # exit if not repetative or repeat_times == 0
+                if not self.repetative or repeat_times == 0:
+                    break
+                repeat_times -= 1
                 
                 now = time.time()
                 if self.pets_time == 0 or now - self.pets_time > 60:
@@ -92,10 +97,6 @@ class Bot():
 
                 self.custom_function()
                 
-                # exit if not repetative or repeat_times == 0
-                if not self.repetative or repeat_times == 0:
-                    break
-                repeat_times -= 1
                 
             time.sleep(0.01)
 
