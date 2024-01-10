@@ -76,7 +76,7 @@ class Bot():
             if config.enabled and not config.locked:
 
                 # exit if not repetative or repeat_times == 0
-                print(repeat_times)
+                print(f'remaining times: {repeat_times}')
                 if not self.repetative and repeat_times == 0:
                     break
                 repeat_times -= 1
