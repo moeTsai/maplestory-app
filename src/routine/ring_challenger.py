@@ -324,6 +324,7 @@ def summon():
     pass
 
 def out():
+    reset_keys(['left', 'right'])
     npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
     while len(npc_pos) == 0 and config.enabled:
         print(' -  finding npc...(out)')
