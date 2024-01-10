@@ -52,8 +52,11 @@ def type_auth(code, entry_pos):
     entry_pos = list(entry_pos)
     x_bias, y_bias = 90, 30
 
-    entry_pos[0] += x_bias + config.capture.window['left']
-    entry_pos[1] += y_bias + config.capture.window['top']
+    # entry_pos[0] += x_bias + config.capture.window['left']
+    # entry_pos[1] += y_bias + config.capture.window['top']
+    entry_pos[0] += x_bias
+    entry_pos[1] += y_bias
+    
 
     # click the auth box
     p_in.click(entry_pos[0], entry_pos[1])

@@ -22,6 +22,7 @@ from src.detection.detection import solve_auth, type_auth
 AUTH_TEMPLATE = cv2.imread('assets/auth_template.png', 0)
 AUTH_ENTRY_TEMPLATE = cv2.imread('assets/auth_entry_template.png', 0)
 GIFT_TEMPLATE = cv2.imread('assets/gift_template.png', 0)
+cap = config.capture
 
 
 # auth_filtered = utils.filter_color(cv2.imread('assets/auth_template.png'), AUTH_RANGES)
@@ -61,12 +62,15 @@ class Notifier:
 
                 auth = utils.multi_match(frame, AUTH_TEMPLATE, threshold=0.8)
                 entry = utils.multi_match(frame, AUTH_ENTRY_TEMPLATE, threshold=0.8)
+                auth = (auth[0][0] + cap.window['left'], auth[0][1] + cap.window['top'])
+                entry = (entry[0][0] + cap.window['left'], entry[0][1] + cap.window['top'])
+                
 
                 # found the auth save the auth
                 if auth and entry:
                     print(" -  Auth event detected!")
                     cv2.imwrite('auth.png', frame)
-                    self._solve_auth(frame, auth[0], entry[0])
+                    self._solve_auth(frame, auth, entry)
             time.sleep(0.1)
 
     def _click_gift(self, gift_pos):
