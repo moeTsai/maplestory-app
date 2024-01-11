@@ -85,8 +85,8 @@ def alt_expfix():
     switch_alt()
 
 def threefour():
-    three_pos = utils.multi_match(cap.frame, three, threshold=1)
-    four_pos = utils.multi_match(cap.frame, four, threshold=1)
+    three_pos = utils.multi_match(cap.frame, three, threshold=0.98)
+    four_pos = utils.multi_match(cap.frame, four, threshold=0.98)
     if len(three_pos) > 0:
         return (three_pos[0][0] + cap.window['left'], three_pos[0][1] + cap.window['top'])
                 
@@ -110,8 +110,9 @@ def entry():
     print(f' -  npc detected at {npc_pos}')
     while True:
         click(npc_pos[0])
-        time.sleep(1)
+        time.sleep(2)
         pos = threefour()
+        print(pos)
         if pos:
             click(pos)
             time.sleep(0.25)
