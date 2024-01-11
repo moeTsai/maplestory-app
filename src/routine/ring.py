@@ -108,11 +108,15 @@ def entry():
         return
 
     print(f' -  npc detected at {npc_pos}')
-    click(npc_pos[0])
-    time.sleep(2)
-    pos = threefour()
-    if pos:
-        click(pos)
+    while True:
+        click(npc_pos[0])
+        time.sleep(1)
+        pos = threefour()
+        if pos:
+            click(pos)
+            time.sleep(0.25)
+            break
+        press("Esc",1)
         time.sleep(0.25)
         # press("Enter",1)
         # time.sleep(0.25)
