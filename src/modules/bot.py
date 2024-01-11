@@ -114,7 +114,7 @@ class Bot():
         from src.common.utils_game import hp_fill, mp_fill
         
         for _ in range(2):
-            hp_fill(self.hp_percent_to_fill)
+            # hp_fill(self.hp_percent_to_fill)
             time.sleep(0.1)
             mp_fill(self.mp_percent_to_fill)
             time.sleep(0.1)
