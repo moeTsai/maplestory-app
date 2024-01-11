@@ -62,13 +62,12 @@ class Notifier:
 
                 auth = utils.multi_match(frame, AUTH_TEMPLATE, threshold=0.8)
                 entry = utils.multi_match(frame, AUTH_ENTRY_TEMPLATE, threshold=0.8)
-                auth = (auth[0][0] + cap.window['left'], auth[0][1] + cap.window['top'])
-                entry = (entry[0][0] + cap.window['left'], entry[0][1] + cap.window['top'])
-                
 
                 # found the auth save the auth
                 if auth and entry:
                     print(" -  Auth event detected!")
+                    auth = (auth[0][0] + cap.window['left'], auth[0][1] + cap.window['top'])
+                    entry = (entry[0][0] + cap.window['left'], entry[0][1] + cap.window['top'])
                     cv2.imwrite('auth.png', frame)
                     self._solve_auth(frame, auth, entry)
             time.sleep(0.1)
