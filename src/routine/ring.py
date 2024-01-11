@@ -22,6 +22,8 @@ heal = DEFAULT_CONFIG['Heal']
 npc = cv2.imread('assets/routine/ring/npc.png', 0)
 fight_req = cv2.imread('assets/routine/ring/fight_request.png', 0)
 tomb = cv2.imread('assets/routine/ring/tomb.png', 0)
+three = cv2.imread('assets/routine/ring/three.png', 0)
+four = cv2.imread('assets/routine/ring/four.png', 0)
 
 threshold = 0.98
 
@@ -82,6 +84,17 @@ def alt_expfix():
     expfix()
     switch_alt()
 
+def threefour():
+    three = utils.multi_match(cap.frame, three, threshold=1)
+    four = utils.multi_match(cap.frame, four, threshold=1)
+    if three:
+        return (three[0][0] + cap.window['left'], three[0][1] + cap.window['top'])
+                
+    if four:
+        return (four[0][0] + cap.window['left'], four[0][1] + cap.window['top'])
+
+    return None
+
 def entry():
     global alt_has_died
     alt_has_died = False
@@ -97,16 +110,22 @@ def entry():
     print(f' -  npc detected at {npc_pos}')
     click(npc_pos[0])
     time.sleep(2)
-    press('down', 1)
-    time.sleep(0.25)
-    press('down', 1)
-    time.sleep(0.25)
-    press('down', 1)
-    time.sleep(0.25)
-    press(interact, 1)
-    time.sleep(0.25)
-    press('down', 1)
-    time.sleep(0.25)
+    pos = threefour()
+    if pos:
+        click(pos)
+        time.sleep(0.25)
+        # press("Enter",1)
+        # time.sleep(0.25)
+        # press('down', 1)
+        # time.sleep(0.25)
+        # press('down', 1)
+        # time.sleep(0.25)
+        # press('down', 1)
+        # time.sleep(0.25)
+        # press(interact, 1)
+        # time.sleep(0.25)
+        # press('down', 1)
+        # time.sleep(0.25)
 
 def wait_for_request():
     fight_req_pos = utils.multi_match(cap.frame, fight_req, threshold=threshold)
