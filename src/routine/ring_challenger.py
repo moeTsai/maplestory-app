@@ -107,7 +107,7 @@ def entry():
             join_pos = (join_pos[0] + cap.window['left'], join_pos[1] + cap.window['top'])
             click(join_pos)
             time.sleep(1)
-            press("Enter",1)
+            # press("Enter",1)
             break
         press("Esc",1)
         time.sleep(1)
