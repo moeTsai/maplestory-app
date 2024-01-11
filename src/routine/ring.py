@@ -87,10 +87,10 @@ def alt_expfix():
 def threefour():
     three_pos = utils.multi_match(cap.frame, three, threshold=1)
     four_pos = utils.multi_match(cap.frame, four, threshold=1)
-    if three_pos:
+    if len(three_pos) > 0:
         return (three_pos[0][0] + cap.window['left'], three_pos[0][1] + cap.window['top'])
                 
-    if four_pos:
+    if len(four_pos) > 0:
         return (four_pos[0][0] + cap.window['left'], four_pos[0][1] + cap.window['top'])
 
     return None
