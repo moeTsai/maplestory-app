@@ -85,13 +85,13 @@ def alt_expfix():
     switch_alt()
 
 def threefour():
-    three = utils.multi_match(cap.frame, three, threshold=1)
-    four = utils.multi_match(cap.frame, four, threshold=1)
-    if three:
-        return (three[0][0] + cap.window['left'], three[0][1] + cap.window['top'])
+    three_pos = utils.multi_match(cap.frame, three, threshold=1)
+    four_pos = utils.multi_match(cap.frame, four, threshold=1)
+    if three_pos:
+        return (three_pos[0][0] + cap.window['left'], three_pos[0][1] + cap.window['top'])
                 
-    if four:
-        return (four[0][0] + cap.window['left'], four[0][1] + cap.window['top'])
+    if four_pos:
+        return (four_pos[0][0] + cap.window['left'], four_pos[0][1] + cap.window['top'])
 
     return None
 
