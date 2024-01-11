@@ -163,7 +163,7 @@ def fight():
             time.sleep(1)
             press(buff1, 1)
         attack_monster()
-        time.sleep(0.5)
+        time.sleep(0.8)
     # time.sleep(0.1)
 
 def check_dead():
