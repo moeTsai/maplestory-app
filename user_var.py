@@ -26,7 +26,7 @@ mp_percent_to_fill = 20
 # if the routine is repetative
 repetative = False
 # disabled if repetative is True
-repeat_times = 6
+repeat_times = 10
 
 
 DEFAULT_CONFIG = z_custom.DEFAULT_CONFIG
