@@ -142,7 +142,7 @@ def fight():
     alt_time = None
     alt_time = time.time()
     while time.time() - entry_time < 601:
-        if not config.enabled:
+        if not config.enabled or config.locked:
             time.sleep(0.1)
             continue
         if alt_time is None:
