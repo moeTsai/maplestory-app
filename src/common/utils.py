@@ -17,7 +17,7 @@ def run_if_enabled(function):
     """
 
     def helper(*args, **kwargs):
-        if config.enabled and not config.locked:
+        if config.enabled:
             return function(*args, **kwargs)
     return helper
 

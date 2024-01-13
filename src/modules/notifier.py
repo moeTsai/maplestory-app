@@ -22,7 +22,6 @@ from src.detection.detection import solve_auth, type_auth
 AUTH_TEMPLATE = cv2.imread('assets/auth_template.png', 0)
 AUTH_ENTRY_TEMPLATE = cv2.imread('assets/auth_entry_template.png', 0)
 GIFT_TEMPLATE = cv2.imread('assets/gift_template.png', 0)
-cap = config.capture
 
 
 # auth_filtered = utils.filter_color(cv2.imread('assets/auth_template.png'), AUTH_RANGES)
@@ -35,6 +34,8 @@ class Notifier:
         """initialize the notifier class."""
 
         self.ready = False
+        self.cap = config.capture
+
         self.thread = threading.Thread(target=self._main)
         self.thread.daemon = True
 
@@ -66,8 +67,9 @@ class Notifier:
                 # found the auth save the auth
                 if auth and entry:
                     print(" -  Auth event detected!")
-                    auth = (auth[0][0] + cap.window['left'], auth[0][1] + cap.window['top'])
-                    entry = (entry[0][0] + cap.window['left'], entry[0][1] + cap.window['top'])
+                    auth = (auth[0][0], auth[0][1])
+                    entry = (entry[0][0], entry[0][1])
+                    
                     cv2.imwrite('auth.png', frame)
                     self._solve_auth(frame, auth, entry)
             time.sleep(0.1)
@@ -84,7 +86,7 @@ class Notifier:
         """Solve the authentication event."""
         
         def filter_alphanumeric(text):
-            return "".join(filter(lambda x: x.isalnum(), text))
+            return "".join(filter(lambda x: x.isalnum(), text)) if text != None else None
         # pause the program
         config.locked = True
         time.sleep(2)

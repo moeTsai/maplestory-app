@@ -51,11 +51,8 @@ def type_auth(code, entry_pos):
     p_in.PAUSE = 0.01
     entry_pos = list(entry_pos)
     x_bias, y_bias = 90, 30
-
-    # entry_pos[0] += x_bias + config.capture.window['left']
-    # entry_pos[1] += y_bias + config.capture.window['top']
-    entry_pos[0] += x_bias
-    entry_pos[1] += y_bias
+    entry_pos[0] += x_bias + config.capture.window['left']
+    entry_pos[1] += y_bias + config.capture.window['top']
     
 
     # click the auth box
@@ -68,7 +65,6 @@ def type_auth(code, entry_pos):
         time.sleep(0.3)
 
     # p_in.write(code, interval=0.5)
-
 
     if BOT_TOKEN and CHAT_ID:
 
