@@ -18,6 +18,7 @@ buff2 = DEFAULT_CONFIG['Buff2']
 tp = DEFAULT_CONFIG['Tp']
 jump = DEFAULT_CONFIG['Jump']
 heal = DEFAULT_CONFIG['Heal']
+feed_pet = heal = DEFAULT_CONFIG['Feed pet']
 
 npc = cv2.imread('assets/routine/ring/npc.png', 0)
 fight_req = cv2.imread('assets/routine/ring/fight_request.png', 0)
@@ -157,13 +158,14 @@ def fight():
     buff_time = None
     alt_time = None
     alt_time = time.time()
+    pet_time = time.time()
     while time.time() - entry_time < 601:
         if not config.enabled or config.locked:
             time.sleep(0.1)
             continue
         if alt_time is None:
             alt_time = time.time()
-            alt_inting()
+            # alt_inting()
         elif time.time() - dead_time > 10:
             dead_time = time.time()
             print(' -  dead checking...')
@@ -186,6 +188,12 @@ def fight():
             press(buff2, 1)
             time.sleep(1)
             press(buff1, 1)
+        
+        if time.time() - pet_time > 300:
+            pet_time = time.time()
+            press(feed_pet, 1)
+            print(f' - feeding...')
+        
         attack_monster()
         time.sleep(0.8)
     # time.sleep(0.1)
