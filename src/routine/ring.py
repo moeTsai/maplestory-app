@@ -425,7 +425,8 @@ def find_next_monster(mons, player_pos):
 
 def switch_alt():
     global is_alt
-
+    
+    reset_keys('left', 'right')
     cap.switch_hwnd()
     time.sleep(0.1)
     left = cap.window['left']
