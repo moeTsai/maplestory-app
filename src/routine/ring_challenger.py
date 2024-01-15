@@ -61,6 +61,7 @@ def _main():
     times = 'infinite' if bot.repetative else bot.repeat_times
     message = f'Remaining {times} times'
     send_message_in_thread(message + ' (starts).')
+    send_photo_in_thread(frame)
     fight()
     expfix()
     alt_expfix()
