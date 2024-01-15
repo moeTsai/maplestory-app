@@ -159,11 +159,12 @@ def fight():
             if check_dead():
                 buff_time = None
                 print('buff time reset')
-        elif time.time() - alt_time > 60:
-            alt_time = time.time()
-            print(' -  active alt')
-            key_up('left')
-            alt_active()
+        # elif time.time() - alt_time > 60:
+        #     alt_time = time.time()
+        #     print(' -  active alt')
+        #     key_up('left')
+        #     alt_active()
+                
         if time.time() - summon_time > 13:
             summon_time = time.time()
             print(' -  summoning...')
