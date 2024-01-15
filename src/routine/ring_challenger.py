@@ -10,6 +10,7 @@ from src.common.utils_game import reset_keys
 
 
 cap = config.capture
+bot = config.bot
 
 attact = DEFAULT_CONFIG['Attack']
 interact = DEFAULT_CONFIG['Interact']
@@ -57,10 +58,13 @@ def _main():
     
     entry()
     wait_for_request()
+    times = 'infinite' if bot.repetative else bot.repeat_times
+    message = f'Remaining {times} times'
+    send_message_in_thread(message + ' (starts).')
     fight()
     expfix()
     alt_expfix()
-    send_photo_in_thread(frame)
+    send_message_in_thread(message + ' (ends).')
     out()
     time.sleep(0.02)
 
