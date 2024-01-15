@@ -195,7 +195,6 @@ def fight():
             print(f' - feeding...')
         
         attack_monster()
-        time.sleep(0.8)
     # time.sleep(0.1)
 
 def check_dead():
