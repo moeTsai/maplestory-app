@@ -83,7 +83,7 @@ class Bot():
                 
                 now = time.time()
                 if self.pets_time == 0 or now - self.pets_time > 60:
-                    press(user_var.DEFAULT_CONFIG['Pets'], 1)
+                    press(user_var.DEFAULT_CONFIG['Feed pet'], 1)
                     self.pets_time = now
                     time.sleep(0.2)
                 if self.buff1_time == 0 or now - self.buff1_time > 120:
