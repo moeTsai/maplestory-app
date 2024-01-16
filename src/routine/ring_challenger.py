@@ -69,7 +69,6 @@ def _main():
     out()
     time.sleep(0.02)
 
-    # fight()
 
 def expfix():
     print(' -  exp fixing...')
@@ -118,15 +117,6 @@ def entry():
         time.sleep(1)
         click(npc_pos)
         time.sleep(1)
-    # time.sleep(0.25)
-    # press('down', 1)
-    # time.sleep(0.25)
-    # press('down', 1)
-    # time.sleep(0.25)
-    # press(interact, 1)
-    # time.sleep(0.25)
-    # press('down', 1)
-    # time.sleep(0.25)
 
 def wait_for_request():
     if not config.enabled:

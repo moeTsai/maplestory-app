@@ -71,7 +71,6 @@ def _main():
     out()
     time.sleep(0.02)
 
-    # fight()
 
 def expfix():
     print(' -  exp fixing...')
@@ -100,14 +99,24 @@ def threefour():
 
     return None
 
+
 def entry():
     global alt_has_died
     alt_has_died = False
     npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
+    dot = 1
+    flag = False
     while len(npc_pos) == 0 and config.enabled:
-        print(' -  finding npc...')
+        if not flag:
+            flag = True
+        else:
+            print(CLEAR_LINE)
+        print(' -  finding npc' + dot * '.')
         npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
+        dot %= 3
+        dot += 1
         time.sleep(0.1)
+        
     
     if not config.enabled:
         return
@@ -124,18 +133,6 @@ def entry():
             break
         press("Esc",1)
         time.sleep(0.25)
-        # press("Enter",1)
-        # time.sleep(0.25)
-        # press('down', 1)
-        # time.sleep(0.25)
-        # press('down', 1)
-        # time.sleep(0.25)
-        # press('down', 1)
-        # time.sleep(0.25)
-        # press(interact, 1)
-        # time.sleep(0.25)
-        # press('down', 1)
-        # time.sleep(0.25)
 
 def wait_for_request():
     fight_req_pos = utils.multi_match(cap.frame, fight_req, threshold=threshold)
@@ -355,7 +352,6 @@ def summon():
 
 def out():
     reset_keys(['left', 'right'])
-
     npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
     while len(npc_pos) == 0 and config.enabled:
         print(' -  finding npc...(out)')
@@ -377,7 +373,6 @@ def out():
     time.sleep(1)
     alt_out()
     
-    pass
 
 def attact_monster(direction_dist):
     """Attack the slime considering direction_dist."""
@@ -442,8 +437,4 @@ def switch_alt():
         is_alt = True
         click((left + 70, top + 766))
 
-    
-    # while (left, top) == (cap.window['left'], cap.window['top']):
-    #     print(' -  waiting for switch')
-    #     time.sleep(0.1)
     time.sleep(0.1)
