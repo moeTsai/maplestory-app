@@ -107,10 +107,10 @@ def entry():
     dot = 1
     flag = False
     while len(npc_pos) == 0 and config.enabled:
-        if not flag:
-            flag = True
-        else:
+        if flag:
             print(CLEAR_LINE)
+        else:
+            flag = True
         print(' -  finding npc' + dot * '.')
         npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
         dot %= 3
