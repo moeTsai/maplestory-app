@@ -1,2 +1,2 @@
 # maplestory-app
- A developing maplestory assistant app
+ A maplestory assistant app
