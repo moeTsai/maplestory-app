@@ -99,22 +99,25 @@ def threefour():
 
     return None
 
-def find_image_console(image, message = 'waiting', end_message = ''):
-    CURCOR_UP = '\033[1A'
-    CLEAR = '\x1b[1A'
-    CLEAR_LINE = CURCOR_UP + CLEAR
+def find_image_console(image, message = 'waiting'):
+    LINE_UP = '\033[1A'
+    LINE_CLEAR = '\x1b[2K'
     dot_num = 1
+    count = 0
     first = True
     image_pos = utils.multi_match(cap.frame, image, threshold=threshold)
     while len(image_pos) == 0 and config.enabled:
         if first:
             first = False
         else:
-            print(CLEAR_LINE)
-        print(message + dot_num * '.' + end_message)
+            print(LINE_UP, end=LINE_CLEAR)
+        print(message + dot_num * '.')
         image_pos = utils.multi_match(cap.frame, image, threshold=threshold)
-        dot_num %= 5
-        dot_num += 1
+        count += 1
+        if count > 5:
+            dot %= 5
+            dot += 1
+            count = 0
         time.sleep(0.1)
     
     return image_pos
