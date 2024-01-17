@@ -141,19 +141,7 @@ def entry():
         time.sleep(0.25)
 
 def wait_for_request():
-    fight_req_pos = utils.multi_match(cap.frame, fight_req, threshold=threshold)
-    dot = 1
-    flag = False
-    while len(fight_req_pos) == 0 and config.enabled:
-        if flag:
-            print(CLEAR_LINE)
-        else:
-            flag = True
-        print(' -  finding request' + dot * '.')
-        fight_req_pos = utils.multi_match(cap.frame, fight_req, threshold=threshold)
-        dot %= 3
-        dot += 1
-        time.sleep(0.5)
+    find_image_console(fight_req, message = ' -  finding npc')
     
     if not config.enabled:
         return
