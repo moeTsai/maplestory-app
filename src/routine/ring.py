@@ -144,7 +144,7 @@ def entry():
         time.sleep(0.25)
 
 def wait_for_request():
-    find_image_console(fight_req, message = ' -  finding npc')
+    find_image_console(fight_req, message = ' -  finding request')
     
     if not config.enabled:
         return
