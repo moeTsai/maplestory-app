@@ -135,7 +135,7 @@ def entry():
         time.sleep(0.25)
 
 def wait_for_request():
-    npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
+    fight_req_pos = utils.multi_match(cap.frame, fight_req, threshold=threshold)
     dot = 1
     flag = False
     while len(npc_pos) == 0 and config.enabled:
@@ -144,7 +144,7 @@ def wait_for_request():
         else:
             flag = True
         print(' -  finding request' + dot * '.')
-        npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
+        fight_req_pos = utils.multi_match(cap.frame, fight_req, threshold=threshold)
         dot %= 3
         dot += 1
         time.sleep(0.5)
