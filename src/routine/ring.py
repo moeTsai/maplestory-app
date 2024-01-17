@@ -99,25 +99,31 @@ def threefour():
 
     return None
 
+def find_image_console(image, message = 'waiting'):
+    CURCOR_UP = '\033[1A'
+    CLEAR = '\x1b[1A'
+    CLEAR_LINE = CURCOR_UP + CLEAR
+    dot_num = 1
+    first = True
+    image_pos = utils.multi_match(cap.frame, image, threshold=threshold)
+    while len(image_pos) == 0 and config.enabled:
+        if first:
+            first = False
+        else:
+            print(CLEAR_LINE)
+        print(message + dot_num * '.')
+        image_pos = utils.multi_match(cap.frame, image, threshold=threshold)
+        dot %= 5
+        dot += 1
+        time.sleep(0.1)
+    
+    return image_pos
 
 def entry():
     global alt_has_died
     alt_has_died = False
-    npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
-    dot = 1
-    flag = False
-    while len(npc_pos) == 0 and config.enabled:
-        if flag:
-            print(CLEAR_LINE)
-        else:
-            flag = True
-        print(' -  finding npc' + dot * '.')
-        npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
-        dot %= 3
-        dot += 1
-        time.sleep(0.1)
+    npc_pos = find_image_console(npc, message = ' -  finding npc')
         
-    
     if not config.enabled:
         return
 
