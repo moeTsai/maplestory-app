@@ -107,10 +107,10 @@ def find_image_console(image, message = 'waiting'):
     first = True
     image_pos = utils.multi_match(cap.frame, image, threshold=threshold)
     while len(image_pos) == 0 and config.enabled:
-        if first:
-            first = False
-        else:
-            print(LINE_UP, end=LINE_CLEAR)
+        # if first:
+        #     first = False
+        # else:
+        #     print(LINE_UP, end=LINE_CLEAR)
         print(message + dot_num * '.')
         image_pos = utils.multi_match(cap.frame, image, threshold=threshold)
         count += 1
