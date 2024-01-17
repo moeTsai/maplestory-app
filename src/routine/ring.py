@@ -113,8 +113,8 @@ def find_image_console(image, message = 'waiting', end_message = ''):
             print(CLEAR_LINE)
         print(message + dot_num * '.' + end_message)
         image_pos = utils.multi_match(cap.frame, image, threshold=threshold)
-        dot %= 5
-        dot += 1
+        dot_num %= 5
+        dot_num += 1
         time.sleep(0.1)
     
     return image_pos
