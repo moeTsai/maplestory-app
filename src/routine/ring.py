@@ -112,9 +112,9 @@ def find_image_console(image, message = 'waiting'):
         # else:
         #     print(LINE_UP, end=LINE_CLEAR)
         image_pos = utils.multi_match(cap.frame, image, threshold=threshold)
+        count += 1
         if count > 5:
             print(message + dot_num * '.')
-            count += 1
             dot_num %= 5
             dot_num += 1
             count = 0
