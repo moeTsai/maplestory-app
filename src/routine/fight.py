@@ -37,7 +37,7 @@ def _main():
         time.sleep(random.randint(10,30)/100)
 
     time.sleep(1.2)
-    active_fight(0.72)
+    active_fight(0.715)
 
 def active_fight(x):
     delayyyy = 0.1
