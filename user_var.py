@@ -25,7 +25,7 @@ hp_percent_to_fill = 40
 mp_percent_to_fill = 20
 
 # if the routine is repetative
-repetative = False
+repetative = True
 # disabled if repetative is True
 repeat_times = 10
 
