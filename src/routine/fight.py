@@ -23,7 +23,7 @@ is_alt = False
 alt_time = None
 
 def _main():
-    num = random.randint(100,150)
+    num = random.randint(100,120)
     global alt_time
     for _ in range(num):
         if config.locked:
