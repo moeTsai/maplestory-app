@@ -28,19 +28,21 @@ threshold = 0.95
 
 
 def _main():
-    num = 150 + random.randint(50)
+    num = random.randint(100,150)
     for i in range(num):
         press(heal, 1)
-        time.sleep(random.randint(30)/100)
+        time.sleep(random.randint(10,30)/100)
+    time.sleep(1.2)
     key_down('right')
-    time.sleep(0.05)
+    time.sleep(0.1)
     key_up('right')
-    num = 150 + random.randint(50)
+    num = random.randint(100,150)
     for i in range(num):
         press(heal, 1)
-        time.sleep(random.randint(30)/100)
+        time.sleep(random.randint(10,30)/100)
+    time.sleep(1.2)
     key_down('left')
-    time.sleep(0.05)
+    time.sleep(0.1)
     key_up('left')
 
 
