@@ -63,6 +63,10 @@ def switch_alt():
     reset_keys(['left', 'right'])
     cap.switch_hwnd()
     time.sleep(0.1)
+
+    while config.locked:
+        time.sleep(0.1)
+
     left = cap.window['left']
     top = cap.window['top']
     if is_alt:
