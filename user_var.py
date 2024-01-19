@@ -10,6 +10,7 @@ current_routines = {
     1: 'daemon_slime',
     2: 'ring',
     3: 'ring_challenger',
+    4: 'fight',
 }
 
 # dynamic import z_custom
