@@ -8,31 +8,31 @@ from src.common.vkeys import press, click, key_down, key_up
 from src.common.utils_game import reset_keys
 import random
 
+cap = config.capture
+bot = config.bot
+
 attact = DEFAULT_CONFIG['Attack']
 heal = DEFAULT_CONFIG['Heal']
 
 # import pydirectinput as p_in
 # p_in.PAUSE = 0.01
 
-SLIME_TEMPLATE_LF = cv2.imread('assets/routine/daemon_slime/daemon_left.png', 0)
-SLIME_TEMPLATE_RT = cv2.imread('assets/routine/daemon_slime/daemon_right.png', 0)
-
-REAL_PLAYER_TEMPLATE = cv2.imread('assets/routine/daemon_slime/real_player.png', 0)
-
-if SLIME_TEMPLATE_LF is None:
-    print(' -  Failed to load daemon_left.png')
-if SLIME_TEMPLATE_RT is None:
-    print(' -  Failed to load daemon_right.png')
 
 threshold = 0.95
-
+is_alt = False
+alt_time = None
 
 def _main():
     num = random.randint(100,150)
+    global alt_time
     for _ in range(num):
         if config.locked:
             time.sleep(0.1)
             continue
+        if not alt_time or time.time() - alt_time > 59:
+            alt_time = time.time()
+            print(' -  active alt')
+            alt_active()
         press(heal, 1)
         time.sleep(random.randint(10,30)/100)
 
@@ -49,6 +49,30 @@ def active_fight(x):
         key_down('left')
         time.sleep(delayyyy)
         key_up('left')
+
+def alt_active():
+    switch_alt()
+    press(attact, 2)
+    time.sleep(0.1)
+    press(attact, 2)
+    switch_alt()
+
+def switch_alt():
+    global is_alt
+    
+    reset_keys(['left', 'right'])
+    cap.switch_hwnd()
+    time.sleep(0.1)
+    left = cap.window['left']
+    top = cap.window['top']
+    if is_alt:
+        is_alt = False
+        click((left + 50, top + 40))
+    else:
+        is_alt = True
+        click((left + 70, top + 766))
+
+    time.sleep(0.1)
 
 
 def walk_to(x):
