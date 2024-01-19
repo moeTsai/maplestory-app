@@ -29,7 +29,10 @@ threshold = 0.95
 
 def _main():
     num = random.randint(100,150)
-    for i in range(num):
+    for _ in range(num):
+        if config.locked:
+            time.sleep(0.1)
+            continue
         press(heal, 1)
         time.sleep(random.randint(10,30)/100)
 
