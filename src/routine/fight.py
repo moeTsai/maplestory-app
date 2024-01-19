@@ -32,19 +32,41 @@ def _main():
     for i in range(num):
         press(heal, 1)
         time.sleep(random.randint(10,30)/100)
-    time.sleep(1.2)
-    key_down('right')
-    time.sleep(0.1)
-    key_up('right')
-    num = random.randint(100,150)
-    for i in range(num):
-        press(heal, 1)
-        time.sleep(random.randint(10,30)/100)
-    time.sleep(1.2)
-    key_down('left')
-    time.sleep(0.1)
-    key_up('left')
 
+    time.sleep(1.2)
+    active_fight(0.72)
+
+def active_fight(x):
+    delayyyy = 0.1
+    if x > config.player_pos[0]:
+        key_down('right')
+        time.sleep(delayyyy)
+        key_up('right')
+    else:
+        key_down('left')
+        time.sleep(delayyyy)
+        key_up('left')
+
+
+def walk_to(x):
+    bias = 0.005
+    while config.enabled:
+        
+        cur_pos = config.player_pos[0]
+        # print(cur_pos)
+        if x - bias < cur_pos < x + bias:
+            reset_keys(['left', 'right'])
+            break
+        elif x < cur_pos:
+            key_up('right')
+            key_down('left')
+        else:
+            key_up('left')
+            key_down('right')
+        time.sleep(0.01)
+
+    
+    
 
 def attact_slime(direction_dist):
     """Attack the slime considering direction_dist."""
