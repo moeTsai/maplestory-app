@@ -21,7 +21,7 @@ heal = DEFAULT_CONFIG['Heal']
 threshold = 0.95
 is_alt = False
 alt_time = None
-middle = config.player_pos
+middle = config.player_pos[0]
 print(middle)
 
 
