@@ -21,23 +21,27 @@ heal = DEFAULT_CONFIG['Heal']
 threshold = 0.95
 is_alt = False
 alt_time = None
+middle = config.player_pos
+print(middle)
+
 
 def _main():
     num = random.randint(100,120)
     global alt_time
+    global middle
     for _ in range(num):
         if config.locked:
             time.sleep(0.1)
             continue
-        if not alt_time or time.time() - alt_time > 59:
-            alt_time = time.time()
-            print(' -  active alt')
-            alt_active()
+        # if not alt_time or time.time() - alt_time > 59:
+        #     alt_time = time.time()
+        #     print(' -  active alt')
+        #     alt_active()
         press(heal, 1)
         time.sleep(random.randint(10,30)/100)
 
     time.sleep(1.2)
-    active_fight(0.715)
+    active_fight(middle)
 
 def active_fight(x):
     delayyyy = 0.1
