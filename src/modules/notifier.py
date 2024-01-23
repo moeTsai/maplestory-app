@@ -87,6 +87,28 @@ class Notifier:
         
         def filter_alphanumeric(text):
             return "".join(filter(lambda x: x.isalnum(), text)) if text != None else None
+        
+        def code_fileter(code):
+            if code.isdigit():
+                return code
+            
+            mapping = {
+                'g': '9',
+                'z': '7',
+                'q': '0',
+                'i': '1',
+            }
+            res = ''
+            for c in code:
+                if c.isdigit():
+                    res += c
+                elif c in mapping:
+                    res += mapping[c]
+            
+            return res
+            
+
+        
         # pause the program
         config.locked = True
         time.sleep(2)
@@ -116,6 +138,8 @@ class Notifier:
         print(f' -  Auth code: {code}')
         code = filter_alphanumeric(code)
 
+        code = code_fileter(code)
+
         original = 'auth_data/original'
         os.makedirs(original, exist_ok=True)
         
@@ -131,4 +155,5 @@ class Notifier:
         
         # resume the program
         config.locked = False
+    
     
