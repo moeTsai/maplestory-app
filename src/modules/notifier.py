@@ -14,7 +14,6 @@ from src.common.vkeys import click
 from src.detection.detection import solve_auth, type_auth
 
 
-
 # auth event template
 # AUTH_RANGES = (
 #     ((60,130,180), (80, 148, 199)),
@@ -22,6 +21,11 @@ from src.detection.detection import solve_auth, type_auth
 AUTH_TEMPLATE = cv2.imread('assets/auth_template.png', 0)
 AUTH_ENTRY_TEMPLATE = cv2.imread('assets/auth_entry_template.png', 0)
 GIFT_TEMPLATE = cv2.imread('assets/gift_template.png', 0)
+
+
+ABILITY = cv2.imread('assets/ability_adding/ability.png', 0)
+POINT0 = cv2.imread('assets/ability_adding/point0.png', 0)
+
 
 
 # auth_filtered = utils.filter_color(cv2.imread('assets/auth_template.png'), AUTH_RANGES)
@@ -72,6 +76,18 @@ class Notifier:
                     
                     cv2.imwrite('auth.png', frame)
                     self._solve_auth(frame, auth, entry)
+
+                # ability checking
+                
+                ability = utils.multi_match(frame, ABILITY, threshold=0.99)
+                point0 = utils.multi_match(frame, POINT0, threshold=0.99)
+
+                if ability and not point0:
+                    ability_pos = ability[0]
+                    int_pos = (ability_pos[0] + 130, ability_pos[1] + 270)
+                    click(int_pos)
+                ################
+
             time.sleep(0.1)
 
     def _click_gift(self, gift_pos):
@@ -156,4 +172,4 @@ class Notifier:
         # resume the program
         config.locked = False
     
-    
+
