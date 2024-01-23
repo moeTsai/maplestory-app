@@ -84,7 +84,7 @@ class Notifier:
 
                 if ability and not point0:
                     ability_pos = ability[0]
-                    int_pos = (ability_pos[0] + 130 + self.cap.window['left'], ability_pos[1] + 270 + self.cap.window['top'])
+                    int_pos = (ability_pos[0] + 126 + self.cap.window['left'], ability_pos[1] + 266 + self.cap.window['top'])
                     click(int_pos)
                 ################
 
