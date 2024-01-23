@@ -166,7 +166,7 @@ class Notifier:
 
         type_auth(code, entry_pos)
 
-        time.sleep(10)
+        # time.sleep(10)
         time.sleep(0.1)
         
         # resume the program

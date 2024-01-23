@@ -86,3 +86,5 @@ def type_auth(code, entry_pos):
     p_in.press('enter')
     time.sleep(1)
     p_in.press('enter')
+
+
