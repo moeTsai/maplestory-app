@@ -442,13 +442,12 @@ def switch_alt():
     if is_alt:
         is_alt = False
         click((left + 50, top + 40))
-        time.sleep(0.1)
+        time.sleep(0.05)
         click((left + 50, top + 40))
     else:
         is_alt = True
         click((left + 70, top + 766))
-        time.sleep(0.1)
+        time.sleep(0.05)
         click((left + 70, top + 766))
 
     
-    time.sleep(0.1)
