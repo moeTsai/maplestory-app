@@ -10,7 +10,7 @@ import keyboard as kb
 from datetime import datetime
 
 from src.common import config, utils
-from src.common.vkeys import click
+from src.common.vkeys import click, press
 from src.detection.detection import solve_auth, type_auth
 
 
@@ -80,7 +80,14 @@ class Notifier:
                 # ability checking
                 
                 ability = utils.multi_match(frame, ABILITY, threshold=0.99)
+                
+                if not ability:
+                    press(config.DEFAULT_CONFIG['Ability'], 1)
+                    time.sleep(0.5)
+                    ability = utils.multi_match(frame, ABILITY, threshold=0.99)
                 point0 = utils.multi_match(frame, POINT0, threshold=0.99)
+                    
+
 
                 if ability and not point0:
                     ability_pos = ability[0]
