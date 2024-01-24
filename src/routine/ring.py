@@ -248,6 +248,8 @@ def check_dead():
         switch_alt()
 
     dead_pos = utils.multi_match(cap.frame, tomb, threshold=threshold)
+    print(dead_pos)
+
     if len(dead_pos) > 0:
         dead_pos = dead_pos[0]
         click((cap.window['left'] + dead_pos[0] + 100, cap.window['top'] + dead_pos[1] + 65))
