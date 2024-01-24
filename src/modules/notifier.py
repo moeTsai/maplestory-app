@@ -88,7 +88,7 @@ class Notifier:
                     click(int_pos)
                 ################
 
-            time.sleep(0.1)
+            time.sleep(0.3)
 
     def _click_gift(self, gift_pos):
         """Click the gift button."""
@@ -166,10 +166,11 @@ class Notifier:
 
         type_auth(code, entry_pos)
 
-        # time.sleep(10)
         time.sleep(0.1)
         
         # resume the program
         config.locked = False
+
+        time.sleep(10)
     
 
