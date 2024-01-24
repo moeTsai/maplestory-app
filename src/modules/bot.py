@@ -113,15 +113,12 @@ class Bot():
         """Custom function to be executed by the bot."""
 
         from src.common.utils_game import hp_fill, mp_fill
-
-        time.sleep(2)
         
         for _ in range(2):
             hp_fill(self.hp_percent_to_fill)
             time.sleep(0.1)
             mp_fill(self.mp_percent_to_fill)
             time.sleep(0.1)
-        
 
         # Reload user_var module to get the latest value of 'routine'
         user_var = importlib.reload(importlib.import_module('user_var'))

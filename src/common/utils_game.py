@@ -74,6 +74,7 @@ def hp_fill(percentage):
     # print(f' -  HP {percentage} color: {config.capture.frame[color_L[1], color_L[0]]}')
     # click((color_L[0], color_L[1]))
     # print(f' -  HP {percentage} color: {hp_color[percentage]}')
+
     
     if all(config.capture.frame[color_L[1], color_L[0]] == [177, 177, 177, 255]):
         print(f' -  Filling HP from {percentage}%')
