@@ -64,7 +64,7 @@ def _main():
     send_photo_in_thread(frame)
     fight()
     # expfix()
-    alt_expfix()
+    # alt_expfix()
     send_message_in_thread(message + ' (ends).')
     out()
     time.sleep(0.02)
@@ -142,7 +142,7 @@ def fight():
             continue
         if alt_time is None:
             alt_time = time.time()
-            alt_inting()
+            # alt_inting()
         elif time.time() - dead_time > 10:
             dead_time = time.time()
             print(' -  dead checking...')
