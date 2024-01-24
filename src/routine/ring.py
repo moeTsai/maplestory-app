@@ -251,7 +251,8 @@ def check_dead():
     if len(dead_pos) > 0:
         dead_pos = dead_pos[0]
         click((cap.window['left'] + dead_pos[0] + 100, cap.window['top'] + dead_pos[1] + 65))
-        walk_out()
+        # walk_out()
+        walk_out(down = False)
         return True
 
 def alt_walk():
