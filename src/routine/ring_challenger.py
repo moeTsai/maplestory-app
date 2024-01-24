@@ -254,6 +254,10 @@ def alt_out():
     
     if not config.enabled:
         return
+    
+    # 為了點能力直
+    time.sleep(3)
+    
 
     print(f' -  npc detected at {npc_pos}')
     time.sleep(0.2)

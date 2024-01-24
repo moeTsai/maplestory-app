@@ -243,7 +243,7 @@ def check_dead():
             alt_has_died = True
             print(' -  alt has died')
             dead_pos = dead_pos[0]
-            click((cap.window['left'] + dead_pos[0] + 100, cap.window['top'] + dead_pos[1] + 65))    
+            click((cap.window['left'] + dead_pos[0] + 100, cap.window['top'] + dead_pos[1] + 65))
             walk_out(down = False)
         switch_alt()
 
@@ -290,7 +290,10 @@ def alt_out():
     
     if not config.enabled:
         return
-
+    
+    # 為了點能力直
+    time.sleep(3)
+    
     print(f' -  npc detected at {npc_pos}')
     time.sleep(0.2)
     npc_pos = (npc_pos[0][0] + cap.window['left'], npc_pos[0][1] + cap.window['top'])
