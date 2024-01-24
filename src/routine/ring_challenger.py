@@ -175,21 +175,24 @@ def fight():
 
 def check_dead():
     global alt_has_died
+<<<<<<< HEAD
     def walk_out(down = True, need_heal = True):
+=======
+    def walk_out(down = True):
+>>>>>>> parent of 7d952f1 (update)
         print('...walking out...')
         time.sleep(2)
         key_up('left')
         key_down('right')
         count = 0
         while len(utils.multi_match(cap.frame, TP_TEMPLATE, threshold=threshold)) > 0 or count > 300:
-            if count > 3000:
-                break
             count += 1
             key_down('right')
             press('up', 1)
             time.sleep(0.01)
                 
         key_up('right')
+<<<<<<< HEAD
         if need_heal:
             switch_alt()
             time.sleep(0.3)
@@ -197,13 +200,20 @@ def check_dead():
             time.sleep(0.3)
             press(heal, 2)
             switch_alt()
+=======
+>>>>>>> parent of 7d952f1 (update)
         if down:
+            switch_alt()
+            time.sleep(0.3)
+            press(heal, 2)
+            time.sleep(0.3)
+            press(heal, 2)
+            switch_alt()
             key_down('down')
             for _ in range(5):
                 press(jump, 1)
                 time.sleep(0.3)
             key_up('down')
-        
 
         time.sleep(1)
     
@@ -225,7 +235,11 @@ def check_dead():
         dead_pos = dead_pos[0]
         click((cap.window['left'] + dead_pos[0] + 100, cap.window['top'] + dead_pos[1] + 65))
         # walk_out()
+<<<<<<< HEAD
         walk_out(down = False, need_heal = alt_has_died)
+=======
+        walk_out(down = False)
+>>>>>>> parent of 7d952f1 (update)
         return True
 
 def alt_walk():
