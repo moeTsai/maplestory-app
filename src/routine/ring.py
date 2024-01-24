@@ -65,8 +65,8 @@ def _main():
     send_message_in_thread(message + ' (starts).')
     send_photo_in_thread(frame)
     fight()
-    expfix()
-    alt_expfix()
+    # expfix()
+    # alt_expfix()
     send_message_in_thread(message + ' (ends).')
     out()
     time.sleep(0.02)
@@ -293,7 +293,7 @@ def alt_out():
     
     # 為了點能力直
     time.sleep(3)
-    
+
     print(f' -  npc detected at {npc_pos}')
     time.sleep(0.2)
     npc_pos = (npc_pos[0][0] + cap.window['left'], npc_pos[0][1] + cap.window['top'])
@@ -433,7 +433,7 @@ def find_next_monster(mons, player_pos):
 
 def switch_alt():
     global is_alt
-    
+
     reset_keys(['left', 'right'])
     cap.switch_hwnd()
     time.sleep(0.1)
@@ -442,8 +442,13 @@ def switch_alt():
     if is_alt:
         is_alt = False
         click((left + 50, top + 40))
+        time.sleep(0.1)
+        click((left + 50, top + 40))
     else:
         is_alt = True
         click((left + 70, top + 766))
+        time.sleep(0.1)
+        click((left + 70, top + 766))
 
+    
     time.sleep(0.1)
