@@ -286,6 +286,7 @@ def alt_active():
 
 def alt_out():
     switch_alt()
+    press(heal, 2)
     time.sleep(0.5)
     npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
     while len(npc_pos) == 0 and config.enabled:
