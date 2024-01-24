@@ -88,7 +88,7 @@ class Notifier:
                     click(int_pos)
                 ################
 
-            time.sleep(0.3)
+            time.sleep(0.1)
 
     def _click_gift(self, gift_pos):
         """Click the gift button."""
@@ -110,12 +110,12 @@ class Notifier:
             
             mapping = {
                 'g': '9',
-                'z': '7',
-                'q': '0',
-                'i': '1',
                 'G': '9',
+                'z': '7',
                 'Z': '7',
+                'q': '0',
                 'Q': '0',
+                'i': '1',
                 'I': '1',
             }
             res = ''

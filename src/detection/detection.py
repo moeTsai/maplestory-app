@@ -49,20 +49,21 @@ def type_auth(code, entry_pos):
     :param auth_pos: the position of the authentication box.
     """
     p_in.PAUSE = 0.01
-    entry_pos = list(entry_pos)
-    x_bias, y_bias = 90, 30
-    entry_pos[0] += x_bias + config.capture.window['left']
-    entry_pos[1] += y_bias + config.capture.window['top']
-    
+    if len(code) == 4:
+        entry_pos = list(entry_pos)
+        x_bias, y_bias = 90, 30
+        entry_pos[0] += x_bias + config.capture.window['left']
+        entry_pos[1] += y_bias + config.capture.window['top']
+        
 
-    # click the auth box
-    p_in.click(entry_pos[0], entry_pos[1])
-    p_in.click(entry_pos[0], entry_pos[1])
+        # click the auth box
+        p_in.click(entry_pos[0], entry_pos[1])
+        p_in.click(entry_pos[0], entry_pos[1])
 
-    # # type the code
-    for c in code:
-        press(c, 1)
-        time.sleep(0.3)
+        # # type the code
+        for c in code:
+            press(c, 1)
+            time.sleep(0.3)
 
     # p_in.write(code, interval=0.5)
 
