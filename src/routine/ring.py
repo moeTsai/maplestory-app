@@ -211,7 +211,7 @@ def fight():
 
 def check_dead():
     global alt_has_died
-    def walk_out(down = True, heal = True):
+    def walk_out(down = True, need_heal = True):
         print('...walking out...')
         time.sleep(2)
         key_up('left')
@@ -226,7 +226,7 @@ def check_dead():
             time.sleep(0.01)
                 
         key_up('right')
-        if heal:
+        if need_heal:
             switch_alt()
             time.sleep(0.3)
             press(heal, 2)
@@ -260,7 +260,7 @@ def check_dead():
         dead_pos = dead_pos[0]
         click((cap.window['left'] + dead_pos[0] + 100, cap.window['top'] + dead_pos[1] + 65))
         # walk_out()
-        walk_out(down = False, heal = alt_has_died)
+        walk_out(down = False, need_heal = alt_has_died)
         return True
 
 def alt_walk():
