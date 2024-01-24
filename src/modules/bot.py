@@ -113,6 +113,8 @@ class Bot():
         """Custom function to be executed by the bot."""
 
         from src.common.utils_game import hp_fill, mp_fill
+
+        time.sleep(2)
         
         for _ in range(2):
             hp_fill(self.hp_percent_to_fill)
