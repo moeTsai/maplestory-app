@@ -93,14 +93,6 @@ class Bot():
                     time.sleep(2)
 
                 
-                from src.common.utils_game import hp_fill, mp_fill
-                
-                for _ in range(2):
-                    hp_fill(self.hp_percent_to_fill)
-                    time.sleep(0.1)
-                    mp_fill(self.mp_percent_to_fill)
-                    time.sleep(0.1)
-                
                 # if self.buff2_time == 0 or now - self.buff2_time > 121:
                 #     press(user_var.DEFAULT_CONFIG['Buff2'], 1)
                 #     time.sleep(0.1)
