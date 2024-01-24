@@ -125,6 +125,10 @@ def wait_for_request():
     press(buff1, 2)
     time.sleep(0.5)
     press(buff2, 2)
+    ABILITY = cv2.imread('assets/ability_adding/ability.png', 0)
+    ability = utils.multi_match(cap.frame, ABILITY, threshold=0.99)
+    if not ability:
+        press(DEFAULT_CONFIG['Ability'], 1)
     time.sleep(10)
 
 
