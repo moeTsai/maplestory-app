@@ -70,7 +70,6 @@ def attact_slime(direction_dist):
     facing = config.real_player_facing
     press(DEFAULT_CONFIG['Pick up'], 1)
     if direction_dist > too_far:
-
         key_down('right')
         # time.sleep(0.1)
     elif direction_dist < -too_far:
@@ -80,7 +79,7 @@ def attact_slime(direction_dist):
         reset_keys(['left', 'right'])
         if facing and facing != 'left':
             key_down('right')
-            time.sleep(0.3)
+            time.sleep(0.5)
             key_up('right')
             facing = 'right'
         press(attact, 1)
@@ -88,7 +87,7 @@ def attact_slime(direction_dist):
         reset_keys(['left', 'right'])
         if facing and facing != 'right':
             key_down('left')
-            time.sleep(0.3)
+            time.sleep(0.5)
             key_up('left')
             facing = 'left'
         press(attact, 1)
