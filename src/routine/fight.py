@@ -57,6 +57,7 @@ def back_to_middleY(y):
     elif y < config.player_pos[1]:
         time.sleep(0.3)
         walk_to(middle)
+        reset_keys(['left', 'right'])
         key_down('up')
         press(tp, 1)
         time.sleep(0.1)
@@ -103,7 +104,7 @@ def switch_alt():
 
 
 def walk_to(x):
-    bias = 0.005
+    bias = 0.01
     while config.enabled:
         
         cur_pos = config.player_pos[0]
