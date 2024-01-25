@@ -65,7 +65,7 @@ def _main():
     send_message_in_thread(message + ' (starts).')
     send_photo_in_thread(frame)
     fight()
-    # expfix()
+    expfix()
     # alt_expfix()
     send_message_in_thread(message + ' (ends).')
     out()

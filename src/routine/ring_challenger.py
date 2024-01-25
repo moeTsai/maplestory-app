@@ -63,7 +63,7 @@ def _main():
     send_message_in_thread(message + ' (starts).')
     send_photo_in_thread(frame)
     fight()
-    # expfix()
+    expfix()
     # alt_expfix()
     send_message_in_thread(message + ' (ends).')
     out()
@@ -223,7 +223,6 @@ def check_dead():
     if len(dead_pos) > 0:
         dead_pos = dead_pos[0]
         click((cap.window['left'] + dead_pos[0] + 100, cap.window['top'] + dead_pos[1] + 65))
-        # walk_out()
         walk_out(down = False, need_heal = alt_has_died)
         return True
 
