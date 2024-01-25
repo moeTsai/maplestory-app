@@ -255,7 +255,6 @@ def check_dead():
     if len(dead_pos) > 0:
         dead_pos = dead_pos[0]
         click((cap.window['left'] + dead_pos[0] + 100, cap.window['top'] + dead_pos[1] + 65))
-        # walk_out()
         walk_out(down = False, need_heal = alt_has_died)
         return True
 
@@ -284,7 +283,6 @@ def alt_active():
 
 def alt_out():
     switch_alt()
-    press(heal, 2)
     time.sleep(0.5)
     npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
     while len(npc_pos) == 0 and config.enabled:
@@ -363,7 +361,6 @@ def summon():
 
 def out():
     reset_keys(['left', 'right'])
-    alt_out()
 
     npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
     while len(npc_pos) == 0 and config.enabled:
@@ -384,6 +381,8 @@ def out():
     time.sleep(0.2)
     press('enter', 1)
     time.sleep(1)
+    alt_out()
+
     
 
 def attact_monster(direction_dist):
