@@ -154,13 +154,11 @@ def wait_for_request():
     press(buff1, 2)
     time.sleep(0.5)
     press(buff2, 2)
-    
-    ABILITY = cv2.imread('assets/ability_adding/ability.png', 0)
-    ability = utils.multi_match(cap.frame, ABILITY, threshold=0.99)
-    if not ability:
-        press(DEFAULT_CONFIG['Ability'], 1)
-    time.sleep(10)
 
+    adding_ability(sec = 5)
+    time.sleep(5)
+    
+    
 def fight():
     # TODO
     entry_time = time.time()
@@ -297,6 +295,7 @@ def alt_out():
     if not config.enabled:
         return
     
+    adding_ability(sec = 3)
 
     print(f' -  npc detected at {npc_pos}')
     time.sleep(0.2)
@@ -361,7 +360,6 @@ def summon():
     press('f7', 2)
     time.sleep(0.1)
     click(monster_pos)
-    pass
 
 def out():
     reset_keys(['left', 'right'])
@@ -434,6 +432,14 @@ def find_next_monster(mons, player_pos):
     # print(f' -  Closest slime at {closest_mon}')
     # print(f' -  Player at {player_pos}')
     return closest_mon[0] - player_pos[0]
+
+def adding_ability(sec = 3):
+    ABILITY = cv2.imread('assets/ability_adding/ability.png', 0)
+    ability = utils.multi_match(cap.frame, ABILITY, threshold=0.99)
+    if not ability:
+        press(DEFAULT_CONFIG['Ability'], 1)
+    time.sleep(sec)
+    press(DEFAULT_CONFIG['Ability'], 1)
 
 def switch_alt():
     global is_alt
