@@ -168,6 +168,8 @@ def fight():
     alt_time = None
     alt_time = time.time()
     pet_time = time.time()
+    stop_after = 300
+
     while time.time() - entry_time < 601:
         if not config.enabled or config.locked:
             time.sleep(0.1)
@@ -203,8 +205,9 @@ def fight():
             press(feed_pet, 1)
             print(f' - feeding...')
         
-        attack_monster()
-        time.sleep(0.8)
+        if time.time() - entry_time > stop_after:
+            attack_monster()
+        time.sleep(0.1)
     # time.sleep(0.1)
 
 def check_dead():

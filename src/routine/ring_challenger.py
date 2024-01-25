@@ -138,6 +138,8 @@ def fight():
     buff_time = None
     alt_time = None
     alt_time = time.time()
+    stop_after = 300
+
     while time.time() - entry_time < 601:
         if not config.enabled or config.locked:
             time.sleep(0.1)
@@ -168,7 +170,9 @@ def fight():
             press(buff2, 1)
             time.sleep(1)
             press(buff1, 1)
-        attack_monster()
+
+        if time.time() - entry_time > stop_after:
+            attack_monster()
     # time.sleep(0.1)
 
 def check_dead():
