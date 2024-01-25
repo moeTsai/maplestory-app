@@ -107,7 +107,7 @@ def switch_alt():
 
 
 def walk_to(x):
-    bias = 0.01
+    bias = 0.03
     while config.enabled:
         
         cur_pos = config.player_pos[0]
