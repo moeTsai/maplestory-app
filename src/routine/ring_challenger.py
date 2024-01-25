@@ -19,6 +19,7 @@ buff2 = DEFAULT_CONFIG['Buff2']
 tp = DEFAULT_CONFIG['Tp']
 jump = DEFAULT_CONFIG['Jump']
 heal = DEFAULT_CONFIG['Heal']
+feed_pet = DEFAULT_CONFIG['Feed pet']
 
 join = cv2.imread('assets/routine/ring/join.png', 0)
 npc = cv2.imread('assets/routine/ring/npc.png', 0)
@@ -170,6 +171,11 @@ def fight():
             press(buff2, 1)
             time.sleep(1)
             press(buff1, 1)
+        
+        if time.time() - pet_time > 300:
+            pet_time = time.time()
+            press(feed_pet, 1)
+            print(f' - feeding...')
 
         if time.time() - entry_time < stop_after:
             attack_monster()
@@ -184,6 +190,8 @@ def check_dead():
         key_down('right')
         count = 0
         while len(utils.multi_match(cap.frame, TP_TEMPLATE, threshold=threshold)) > 0 or count > 300:
+            if count > 3000:
+                break
             count += 1
             key_down('right')
             press('up', 1)
@@ -411,7 +419,6 @@ def adding_ability(sec = 3):
         press(DEFAULT_CONFIG['Ability'], 1)
     time.sleep(sec)
     press(DEFAULT_CONFIG['Ability'], 1)
-
 
 def switch_alt():
     global is_alt

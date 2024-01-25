@@ -207,7 +207,7 @@ def fight():
         
         if time.time() - entry_time < stop_after:
             attack_monster()
-        time.sleep(0.1)
+        time.sleep(0.01)
     # time.sleep(0.1)
 
 def check_dead():
@@ -219,6 +219,8 @@ def check_dead():
         key_down('right')
         count = 0
         while len(utils.multi_match(cap.frame, TP_TEMPLATE, threshold=threshold)) > 0 or count > 300:
+            if count > 3000:
+                break
             count += 1
             key_down('right')
             press('up', 1)
@@ -464,16 +466,12 @@ def switch_alt():
         click((left + 50, top + 40))
         time.sleep(0.02)
         click((left + 50, top + 40))
-        time.sleep(0.05)
-        click((left + 50, top + 40))
     else:
         is_alt = True
         click((left + 70, top + 766))
         time.sleep(0.05)
         click((left + 70, top + 766))
         time.sleep(0.02)
-        click((left + 70, top + 766))
-        time.sleep(0.05)
         click((left + 70, top + 766))
 
     
