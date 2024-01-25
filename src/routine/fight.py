@@ -49,11 +49,13 @@ def _main():
 
 def back_to_middleY(y):
     if y > config.player_pos[1]:
+        time.sleep(0.3)
         key_down('down')
         press(jump, 1)
         time.sleep(0.1)
         key_up('down')
     elif y < config.player_pos[1]:
+        time.sleep(0.3)
         walk_to(middle)
         key_down('up')
         press(tp, 1)
