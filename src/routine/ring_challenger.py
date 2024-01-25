@@ -180,7 +180,7 @@ def check_dead():
         key_down('right')
         count = 0
         while len(utils.multi_match(cap.frame, TP_TEMPLATE, threshold=threshold)) > 0 or count > 300:
-            if count > 3000:
+            if count > 30000:
                 break
             count += 1
             key_down('right')
