@@ -218,7 +218,7 @@ def check_dead():
         key_up('left')
         key_down('right')
         count = 0
-        while len(utils.multi_match(cap.frame, TP_TEMPLATE, threshold=threshold)) > 0 or count > 300:
+        while len(utils.multi_match(cap.frame, TP_TEMPLATE, threshold=threshold)) > 0 or count < 300:
             if count > 3000:
                 break
             count += 1
