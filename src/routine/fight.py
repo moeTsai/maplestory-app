@@ -42,10 +42,10 @@ def _main():
         #     alt_active()
         press(heal, 1)
         time.sleep(random.randint(10,30)/100)
+        back_to_middleY(middleY)
 
     time.sleep(1.2)
     active_fight(middle)
-    back_to_middleY(middleY)
 
 def back_to_middleY(y):
     if y > config.player_pos[1]:
