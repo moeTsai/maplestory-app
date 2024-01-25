@@ -182,8 +182,9 @@ def check_dead():
         time.sleep(2)
         key_up('left')
         key_down('right')
-        time.sleep(3)
-        while len(utils.multi_match(cap.frame, TP_TEMPLATE, threshold=threshold)) > 0:
+        count = 0
+        while len(utils.multi_match(cap.frame, TP_TEMPLATE, threshold=threshold)) > 0 or count > 300:
+            count += 1
             key_down('right')
             press('up', 1)
             time.sleep(0.01)
