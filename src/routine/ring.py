@@ -205,7 +205,7 @@ def fight():
             press(feed_pet, 1)
             print(f' - feeding...')
         
-        if time.time() - entry_time > stop_after:
+        if time.time() - entry_time < stop_after:
             attack_monster()
         time.sleep(0.1)
     # time.sleep(0.1)

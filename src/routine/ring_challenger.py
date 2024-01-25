@@ -171,7 +171,7 @@ def fight():
             time.sleep(1)
             press(buff1, 1)
 
-        if time.time() - entry_time > stop_after:
+        if time.time() - entry_time < stop_after:
             attack_monster()
     # time.sleep(0.1)
 
