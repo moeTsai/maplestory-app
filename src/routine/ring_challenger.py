@@ -331,6 +331,8 @@ def summon():
 
 def out():
     reset_keys(['left', 'right'])
+    alt_out()
+
     npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
     while len(npc_pos) == 0 and config.enabled:
         print(' -  finding npc...(out)')
@@ -350,7 +352,6 @@ def out():
     time.sleep(0.2)
     press('enter', 1)
     time.sleep(1)
-    alt_out()
 
 def attact_monster(direction_dist):
     """Attack the slime considering direction_dist."""
