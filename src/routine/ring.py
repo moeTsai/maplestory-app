@@ -69,7 +69,7 @@ def _main():
     # alt_expfix()
     send_message_in_thread(message + ' (ends).')
     out()
-    time.sleep(0.02)
+    time.sleep(1)
 
 
 def expfix():

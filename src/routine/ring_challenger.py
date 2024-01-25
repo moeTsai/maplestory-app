@@ -67,7 +67,7 @@ def _main():
     # alt_expfix()
     send_message_in_thread(message + ' (ends).')
     out()
-    time.sleep(0.02)
+    time.sleep(1)
 
 
 def expfix():
@@ -428,16 +428,12 @@ def switch_alt():
         click((left + 50, top + 40))
         time.sleep(0.02)
         click((left + 50, top + 40))
-        time.sleep(0.05)
-        click((left + 50, top + 40))
     else:
         is_alt = True
         click((left + 70, top + 766))
         time.sleep(0.05)
         click((left + 70, top + 766))
         time.sleep(0.02)
-        click((left + 70, top + 766))
-        time.sleep(0.05)
         click((left + 70, top + 766))
 
     
