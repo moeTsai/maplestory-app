@@ -173,7 +173,7 @@ def fight():
 
 def check_dead():
     global alt_has_died
-    def walk_out(down = True, need_heal = False):
+    def walk_out(down = True, need_heal = True):
         print('...walking out...')
         time.sleep(2)
         key_up('left')
