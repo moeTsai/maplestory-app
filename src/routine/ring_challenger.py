@@ -21,8 +21,8 @@ jump = DEFAULT_CONFIG['Jump']
 heal = DEFAULT_CONFIG['Heal']
 feed_pet = DEFAULT_CONFIG['Feed pet']
 
-join = cv2.imread('assets/routine/ring/join.png', 0)
 npc = cv2.imread('assets/routine/ring/npc.png', 0)
+join = cv2.imread('assets/routine/ring/join.png', 0)
 fight_req = cv2.imread('assets/routine/ring/fight_request.png', 0)
 tomb = cv2.imread('assets/routine/ring/tomb.png', 0)
 
@@ -225,7 +225,7 @@ def check_dead():
             print(' -  alt has died')
             dead_pos = dead_pos[0]
             click((cap.window['left'] + dead_pos[0] + 100, cap.window['top'] + dead_pos[1] + 65))    
-            walk_out(down = False)
+            walk_out(down = False, need_heal = False)
         switch_alt()
 
     dead_pos = utils.multi_match(cap.frame, tomb, threshold=threshold)

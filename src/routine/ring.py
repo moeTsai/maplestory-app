@@ -253,7 +253,7 @@ def check_dead():
             print(' -  alt has died')
             dead_pos = dead_pos[0]
             click((cap.window['left'] + dead_pos[0] + 100, cap.window['top'] + dead_pos[1] + 65))    
-            walk_out(down = False)
+            walk_out(down = False, need_heal = False)
         switch_alt()
 
     dead_pos = utils.multi_match(cap.frame, tomb, threshold=threshold)
