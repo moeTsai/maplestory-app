@@ -214,11 +214,11 @@ def check_dead():
     global alt_has_died
     def walk_out(down = True, need_heal = True):
         print('...walking out...')
-        time.sleep(2)
+        time.sleep(2.5)
         key_up('left')
         key_down('right')
         count = 0
-        while len(utils.multi_match(cap.frame, TP_TEMPLATE, threshold=threshold)) > 0 or count < 300:
+        while len(utils.multi_match(cap.frame, TP_TEMPLATE, threshold=threshold)) > 0 or count > 300:
             if count > 3000:
                 break
             count += 1
