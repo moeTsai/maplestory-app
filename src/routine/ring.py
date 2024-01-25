@@ -19,7 +19,7 @@ buff2 = DEFAULT_CONFIG['Buff2']
 tp = DEFAULT_CONFIG['Tp']
 jump = DEFAULT_CONFIG['Jump']
 heal = DEFAULT_CONFIG['Heal']
-feed_pet = heal = DEFAULT_CONFIG['Feed pet']
+feed_pet = DEFAULT_CONFIG['Feed pet']
 
 npc = cv2.imread('assets/routine/ring/npc.png', 0)
 fight_req = cv2.imread('assets/routine/ring/fight_request.png', 0)
