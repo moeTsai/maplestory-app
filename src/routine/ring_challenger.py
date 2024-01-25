@@ -370,8 +370,6 @@ def attact_monster(direction_dist):
             key_up('right')
             facing = 'right'
         press(attact, 2)
-        time.sleep(0.1)
-        press(attact, 2)
     else:
         reset_keys(['left', 'right'])
         if facing and facing != 'right':
@@ -379,8 +377,6 @@ def attact_monster(direction_dist):
             time.sleep(1)
             key_up('left')
             facing = 'left'
-        press(attact, 2)
-        time.sleep(0.1)
         press(attact, 2)
     time.sleep(0.01)
 
