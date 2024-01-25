@@ -13,6 +13,8 @@ bot = config.bot
 
 attact = DEFAULT_CONFIG['Attack']
 heal = DEFAULT_CONFIG['Heal']
+jump = DEFAULT_CONFIG['Jump']
+tp = DEFAULT_CONFIG['Tp']
 
 # import pydirectinput as p_in
 # p_in.PAUSE = 0.01
@@ -22,6 +24,7 @@ threshold = 0.95
 is_alt = False
 alt_time = None
 middle = config.player_pos[0]
+middleY = config.player_pos[1]
 print(middle)
 
 
@@ -42,6 +45,20 @@ def _main():
 
     time.sleep(1.2)
     active_fight(middle)
+    back_to_middleY(middleY)
+
+def back_to_middleY(y):
+    if y > config.player_pos[1]:
+        key_down('down')
+        press(jump, 1)
+        time.sleep(0.1)
+        key_up('down')
+    elif y < config.player_pos[1]:
+        walk_to(middle)
+        key_down('up')
+        press(tp, 1)
+        time.sleep(0.1)
+        key_up('up')
 
 def active_fight(x):
     delayyyy = 0.1
