@@ -139,6 +139,7 @@ def fight():
     buff_time = None
     alt_time = None
     alt_time = time.time()
+    pet_time = time.time()
     stop_after = 300
 
     while time.time() - entry_time < 601:
