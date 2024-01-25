@@ -48,17 +48,20 @@ def _main():
     active_fight(middle)
 
 def back_to_middleY(y):
-    if y > config.player_pos[1]:
+    bias = 0.01
+    if config.player_pos[1] + bias < y:
         time.sleep(0.3)
         key_down('down')
+        time.sleep(0.05)
         press(jump, 1)
         time.sleep(0.1)
         key_up('down')
-    elif y < config.player_pos[1]:
+    elif config.player_pos[1] - bias > y:
         time.sleep(0.3)
         walk_to(middle)
         reset_keys(['left', 'right'])
         key_down('up')
+        time.sleep(0.05)
         press(tp, 1)
         time.sleep(0.1)
         key_up('up')
