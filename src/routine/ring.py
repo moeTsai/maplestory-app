@@ -69,6 +69,7 @@ def _main():
     # alt_expfix()
     send_message_in_thread(message + ' (ends).')
     out()
+    alt_out()
     time.sleep(1)
 
 
@@ -290,28 +291,33 @@ def alt_out():
     switch_alt()
     time.sleep(0.5)
     npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
-    while len(npc_pos) == 0 and config.enabled:
-        print(' -  finding npc...(out)')
-        npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
-        time.sleep(0.1)
-    
-    if not config.enabled:
-        return
-    
-    adding_ability(sec = 3)
 
-    print(f' -  npc detected at {npc_pos}')
-    time.sleep(0.2)
-    npc_pos = (npc_pos[0][0] + cap.window['left'], npc_pos[0][1] + cap.window['top'])
-    
-    click(npc_pos)
-    time.sleep(0.2)
-    click(npc_pos)
-    time.sleep(0.5)
-    press('enter', 1)
-    time.sleep(0.2)
-    press('enter', 1)
-    time.sleep(1)
+    # again if it fails
+    while npc_pos[0] == (958, 586):
+        while len(npc_pos) == 0 and config.enabled:
+            print(' -  finding npc...(out)')
+            npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
+            time.sleep(0.1)
+        
+        if not config.enabled:
+            return
+        
+        adding_ability(sec = 3)
+
+        print(f' -  npc detected at {npc_pos}')
+        time.sleep(0.2)
+        npc_pos = (npc_pos[0][0] + cap.window['left'], npc_pos[0][1] + cap.window['top'])
+        
+        click(npc_pos)
+        time.sleep(0.2)
+        click(npc_pos)
+        time.sleep(0.5)
+        press('enter', 1)
+        time.sleep(0.2)
+        press('enter', 1)
+        time.sleep(0.2)
+        npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
+
 
     switch_alt()
 
@@ -369,29 +375,35 @@ def summon():
 def out():
     reset_keys(['left', 'right'])
 
+    
     npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
-    while len(npc_pos) == 0 and config.enabled:
-        print(' -  finding npc...(out)')
-        npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
-        time.sleep(0.1)
-    
-    
-    if not config.enabled:
-        return
 
-    print(f' -  npc detected at {npc_pos}')
-    time.sleep(0.2)
-    
-    npc_pos = (npc_pos[0][0] + cap.window['left'], npc_pos[0][1] + cap.window['top'])
-    click(npc_pos)
-    time.sleep(0.2)
-    click(npc_pos)
-    time.sleep(0.5)
-    press('enter', 1)
-    time.sleep(0.2)
-    press('enter', 1)
-    time.sleep(1)
-    alt_out()
+    # again if it fails
+    while npc_pos[0] == (958, 586):
+
+        npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
+        while len(npc_pos) == 0 and config.enabled:
+            print(' -  finding npc...(out)')
+            npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
+            time.sleep(0.1)
+        
+        
+        if not config.enabled:
+            return
+
+        print(f' -  npc detected at {npc_pos}')
+        time.sleep(0.2)
+        
+        npc_pos = (npc_pos[0][0] + cap.window['left'], npc_pos[0][1] + cap.window['top'])
+        click(npc_pos)
+        time.sleep(0.2)
+        click(npc_pos)
+        time.sleep(0.5)
+        press('enter', 1)
+        time.sleep(0.2)
+        press('enter', 1)
+        time.sleep(0.2)
+
 
     
 
