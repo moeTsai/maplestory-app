@@ -49,6 +49,8 @@ def _main():
 
 def back_to_middleY(y):
     bias = 0.01
+    if not config.enabled:
+        return
     if config.player_pos[1] + bias < y:
         time.sleep(0.3)
         key_down('down')
