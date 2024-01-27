@@ -262,15 +262,18 @@ def alt_active():
 def alt_out():
     switch_alt()
     time.sleep(0.5)
-    npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
     
-    while npc_pos[0] == (958, 586):
+    # again if it fails
+    while True:
+        # npc_pos[0] == (958, 586)
         npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
         while len(npc_pos) == 0 and config.enabled:
             print(' -  finding npc...(out)')
             npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
             time.sleep(0.1)
         
+        if npc_pos[0] != (958, 586):
+            break
         if not config.enabled:
             return
         
@@ -346,16 +349,18 @@ def summon():
 
 def out():
     reset_keys(['left', 'right'])
-    npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
 
     # again if it fails
-    while npc_pos[0] == (958, 586):
+    while True:
+        # npc_pos[0] == (958, 586)
         npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
         while len(npc_pos) == 0 and config.enabled:
             print(' -  finding npc...(out)')
             npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
             time.sleep(0.1)
         
+        if npc_pos[0] != (958, 586):
+            break
         
         if not config.enabled:
             return
