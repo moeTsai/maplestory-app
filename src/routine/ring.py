@@ -290,7 +290,7 @@ def alt_active():
 def alt_out():
     switch_alt()
     time.sleep(0.5)
-    
+    last_pos = None
     # again if it fails
     while True:
         # npc_pos[0] == (958, 586)
@@ -299,8 +299,12 @@ def alt_out():
             print(' -  finding npc...(out)')
             npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
             time.sleep(0.1)
+
         
-        if npc_pos[0] != (958, 586):
+        if last_pos is None:
+            last_pos = npc_pos[0]
+        
+        if npc_pos[0] != last_pos:
             break
         if not config.enabled:
             return
@@ -379,16 +383,19 @@ def summon():
 def out():
     reset_keys(['left', 'right'])
 
+    last_pos = None
     # again if it fails
     while True:
-        # npc_pos[0] == (958, 586)
         npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
         while len(npc_pos) == 0 and config.enabled:
             print(' -  finding npc...(out)')
             npc_pos = utils.multi_match(cap.frame, npc, threshold=threshold)
             time.sleep(0.1)
         
-        if npc_pos[0] != (958, 586):
+        if last_pos is None:
+            last_pos = npc_pos[0]
+        
+        if npc_pos[0] != last_pos:
             break
         
         if not config.enabled:
