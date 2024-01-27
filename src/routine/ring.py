@@ -168,7 +168,7 @@ def fight():
     alt_time = None
     alt_time = time.time()
     pet_time = time.time()
-    stop_after = 300
+    stop_after = 260
 
     while time.time() - entry_time < 601:
         if not config.enabled or config.locked:
