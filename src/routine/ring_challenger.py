@@ -288,13 +288,7 @@ def alt_out():
 
         npc_pos = (npc_pos[0][0] + cap.window['left'], npc_pos[0][1] + cap.window['top'] + 10)
         click(npc_pos)
-        time.sleep(0.2)
-        click(npc_pos)
-        time.sleep(0.2)
-        click(npc_pos)
         time.sleep(0.5)
-        press('enter', 1)
-        time.sleep(0.2)
         press('enter', 1)
         time.sleep(0.2)
 
@@ -373,11 +367,9 @@ def out():
 
         print(f' -  npc detected at {npc_pos}')
         time.sleep(0.2)
-        npc_pos = npc_pos[0]
-        click((cap.window['left'] + npc_pos[0], cap.window['top'] + npc_pos[1] + 10))
+        npc_pos = (npc_pos[0][0] + cap.window['left'], npc_pos[0][1] + cap.window['top'] + 10)
+        click(npc_pos)
         time.sleep(0.5)
-        press('enter', 1)
-        time.sleep(0.2)
         press('enter', 1)
         time.sleep(0.2)
 
