@@ -53,6 +53,7 @@ def back_to_middleY(y):
         return
     if config.player_pos[1] + bias < y:
         time.sleep(0.3)
+        walk_to(middle)
         key_down('down')
         time.sleep(0.05)
         press(jump, 1)
