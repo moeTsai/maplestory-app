@@ -68,6 +68,8 @@ def back_to_middleY(y):
         press(tp, 1)
         time.sleep(0.1)
         key_up('up')
+    else:
+        walk_to(middle)
 
 def active_fight(x):
     delayyyy = 0.1
