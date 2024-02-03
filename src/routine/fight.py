@@ -69,7 +69,7 @@ def back_to_middleY(y):
         time.sleep(0.1)
         key_up('up')
     else:
-        walk_to(middle)
+        walk_to(middle, dash = True)
 
 def active_fight(x):
     delayyyy = 0.1
@@ -111,7 +111,7 @@ def switch_alt():
     time.sleep(0.1)
 
 
-def walk_to(x):
+def walk_to(x, dash = False):
     bias = 0.03
     while config.enabled:
         
@@ -126,6 +126,8 @@ def walk_to(x):
         else:
             key_up('left')
             key_down('right')
+        if dash:
+            press(tp, 1)
         time.sleep(0.01)
 
     
