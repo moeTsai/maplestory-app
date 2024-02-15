@@ -125,6 +125,8 @@ class Notifier:
                 'l': '1',
                 'L': '1',
                 '/': '1',
+                'j': '1',
+                'J': '1',
             }
             res = ''
             for c in code:
