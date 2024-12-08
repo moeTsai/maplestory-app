@@ -55,8 +55,8 @@ class Capture:
         self.window = {
             'left': 0,
             'top': 0,
-            'width': 1366,
-            'height': 768
+            'width': 1920,
+            'height': 1080
         }
         self.ready = False
         self.calibrated = False
@@ -72,7 +72,6 @@ class Capture:
 
         print('\n[-] Started video capture')
         self.thread.start()
-
 
     def _main(self):
         """
@@ -104,8 +103,8 @@ class Capture:
             if self.frame is None:
                 continue
             cv2.imwrite('map.png', self.frame)
-            tl, _ = utils.single_match(self.frame, MM_TL_TEMPLATE)
-            _, br = utils.single_match(self.frame, MM_BR_TEMPLATE, (tl[0], tl[1], 300, 200))
+            tl, _ = utils.single_match(self.frame, MM_TL_TEMPLATE, (0, 0, 200, 150))
+            _, br = utils.single_match(self.frame, MM_BR_TEMPLATE, (tl[0], tl[1], 500, 500))
             # get the location of the hp bar and mp bar
             self.get_hp_bar()
             self.get_mp_bar()
