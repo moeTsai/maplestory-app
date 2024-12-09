@@ -13,7 +13,8 @@ current_routines = {
     4: 'fight',
     5: 'ring2',
     6: 'ring2_challenger',
-    7: 'platoon_chronos'
+    7: 'platoon_chronos',
+    8: 'fast_roping'
 }
 
 # dynamic import z_custom
