@@ -1,3 +1,4 @@
+# artale only
 # 如果同時按上與跳，即執行重複動作，如放開就取消
 
 from src.common.vkeys import press, click, key_down, key_up
