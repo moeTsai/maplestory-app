@@ -137,7 +137,7 @@ class Capture:
                     # Crop the minimap
 
                      # Determine the player's position
-                    player = utils.multi_match(minimap, PLAYER_TEMPLATE, threshold=0.8)
+                    player = utils.multi_match(minimap, PLAYER_TEMPLATE, threshold=0.9)
                     if player:
                         config.player_pos = utils.convert_to_relative(player[0], minimap)
 

@@ -12,8 +12,8 @@ class Minimap(LabelFrame):
     def __init__(self, parent, **kwargs):
         super().__init__(parent, **kwargs)
 
-        self.WIDTH = 400
-        self.HEIGHT = 300
+        self.WIDTH = 600
+        self.HEIGHT = 450
         self.image = None
         self.container = None
         
