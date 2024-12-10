@@ -9,8 +9,8 @@ import time
 
 def perform_repeated_action():
     """執行重複動作的函數"""
-    press('right', 1, down_time=0.08, up_time=0.02)
-    press('left', 1, down_time=0.08, up_time=0.02)
+    press('right', 1, down_time=0.08, up_time=0.01)
+    press('left', 1, down_time=0.08, up_time=0.01)
 
 def _main():
     """主要的監聽迴圈"""

@@ -38,6 +38,7 @@ LEVEL_TEMPLATE = cv2.imread('assets/level_template.png', 0)
 
 # The player's symbol on the minimap
 PLAYER_TEMPLATE = cv2.imread('assets/player_template.png', 0)
+PLAYER_TEMPLATE_ALT = cv2.imread('assets/player2_template.png', 0)
 PT_HEIGHT, PT_WIDTH = PLAYER_TEMPLATE.shape
 
 
@@ -137,7 +138,7 @@ class Capture:
                     # Crop the minimap
 
                      # Determine the player's position
-                    player = utils.multi_match(minimap, PLAYER_TEMPLATE, threshold=0.9)
+                    player = utils.multi_match(minimap, PLAYER_TEMPLATE, threshold=0.95) or utils.multi_match(minimap, PLAYER_TEMPLATE_ALT, threshold=0.95)
                     if player:
                         config.player_pos = utils.convert_to_relative(player[0], minimap)
 
