@@ -82,15 +82,15 @@ class Bot():
                     break
                 repeat_times -= 1
                 
-                now = time.time()
-                if self.pets_time == 0 or now - self.pets_time > 600:
-                    press(user_var.DEFAULT_CONFIG['Feed pet'], 1)
-                    self.pets_time = now
-                    time.sleep(0.2)
-                if self.buff1_time == 0 or now - self.buff1_time > 120:
-                    press(user_var.DEFAULT_CONFIG['Buff1'], 1)
-                    self.buff1_time = now
-                    time.sleep(2)
+                # now = time.time()
+                # if self.pets_time == 0 or now - self.pets_time > 600:
+                #     press(user_var.DEFAULT_CONFIG['Feed pet'], 1)
+                #     self.pets_time = now
+                #     time.sleep(0.2)
+                # if self.buff1_time == 0 or now - self.buff1_time > 120:
+                #     press(user_var.DEFAULT_CONFIG['Buff1'], 1)
+                #     self.buff1_time = now
+                #     time.sleep(2)
 
                 
                 # if self.buff2_time == 0 or now - self.buff2_time > 121:

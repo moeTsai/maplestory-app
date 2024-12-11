@@ -116,6 +116,50 @@ def single_match(frame, template, search_area=None):
 
     return top_left, bottom_right
 
+def load_templates_from_folder(templates_folder):
+    """
+    Loads all templates from a specified folder.
+    :param templates_folder: The folder containing template images.
+    :return:                 A dictionary where keys are template filenames and values are the loaded template images.
+    """
+    import os
+
+    templates = []
+    for template_name in os.listdir(templates_folder):
+        template_path = os.path.join(templates_folder, template_name)
+        template = cv2.imread(template_path, cv2.IMREAD_GRAYSCALE)
+        if template is not None:
+            templates.append(template)
+    return templates
+
+def multi_match_templates(frame, templates, find_first=True, threshold=0.95):
+    """
+    Finds all matches in FRAME that are similar to any TEMPLATE in the list by at least THRESHOLD.
+    :param frame:      The image in which to search.
+    :param templates:  A list of templates to match with.
+    :param threshold:  The minimum percentage of TEMPLATE that each result must match.
+    :return:           A list of matches that exceed THRESHOLD.
+    """
+    matches = []
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    for template in templates:
+        if template.shape[0] > frame.shape[0] or template.shape[1] > frame.shape[1]:
+            continue
+        
+        result = cv2.matchTemplate(gray, template, cv2.TM_CCOEFF_NORMED)
+        locations = np.where(result >= threshold)
+        locations = list(zip(*locations[::-1]))
+        
+        for p in locations:
+            x = int(round(p[0] + template.shape[1] / 2))
+            y = int(round(p[1] + template.shape[0] / 2))
+            if find_first:
+                return [(x, y)]
+            else:
+                matches.append((x, y))
+
+    return matches
 
 
 def multi_match(frame, template, threshold=0.95):
