@@ -13,28 +13,28 @@ jump = DEFAULT_CONFIG['Jump']
 
 # pos: layer
 POS_LAYER = {
-    0.126: 5, # layer
-    0.222: 4,
-    0.314: 3,
-    0.40: 2,
-    0.48: 1
+    0.140: 5, # layer
+    0.224: 4,
+    0.316: 3,
+    0.404: 2,
+    0.500: 1
 }
 
 LAYER_POS = {
-    5: 0.126, # layer
-    4: 0.222,
-    3: 0.314,
-    2: 0.40,
-    1: 0.48
+    5: 0.140, # layer
+    4: 0.224,
+    3: 0.316,
+    2: 0.404,
+    1: 0.500
 }
 
 
 
 LADDER_POS = {
-    5: [0.207],
-    4: [0.308],
-    3: [0.207, 0.415],
-    2: [0.305, 0.519]
+    5: [0.209],
+    4: [0.311],
+    3: [0.212, 0.418],
+    2: [0.308, 0.520]
 }
 
 # import pydirectinput as p_in
@@ -54,7 +54,7 @@ REAL_PLAYER_TEMPLATES = utils.load_templates_from_folder('assets/routine/platoon
 
 
 
-threshold = 0.85
+threshold = 0.90
 no_monster_count = 0
 bias = 0
 move_direction = 1

@@ -52,8 +52,7 @@ class Listener(Configurable):
         while True:
             # run when the bot is loaded and not locked
             if self.enabled and not self.locked:
-                # print(self.config['HP record'])
-
+                # print(self.config['HP record'])\
                 if kb.is_pressed(self.config['Start/stop']):
                     Listener.toggle_enabled()
                 elif self.restricted_pressed('Record position'):
