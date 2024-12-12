@@ -8,7 +8,7 @@ from user_var import DEFAULT_CONFIG
 from src.common.vkeys import press, click, key_down, key_up
 from src.common.utils_game import reset_keys
 
-attact = DEFAULT_CONFIG['Heal']
+attact = DEFAULT_CONFIG['Attack']
 jump = DEFAULT_CONFIG['Jump']
 
 # pos: layer
@@ -78,8 +78,8 @@ def _main():
     
     player_pos = player[0]
 
-    search_top = max(0, player_pos[1] - LAYER_HEIGHT / 2)
-    search_bottom = min(frame.shape[0], player_pos[1] + LAYER_HEIGHT / 2)
+    search_top = max(0, player_pos[1] - int(LAYER_HEIGHT / 2))
+    search_bottom = min(frame.shape[0], player_pos[1] + int(LAYER_HEIGHT / 2))
     search_frame = frame[search_top:search_bottom, :]
     print(f' -  Player detected at {player_pos}')
 

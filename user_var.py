@@ -14,7 +14,8 @@ current_routines = {
     5: 'ring2',
     6: 'ring2_challenger',
     7: 'platoon_chronos',
-    8: 'fast_roping'
+    8: 'fast_roping',
+    10: 'foggy_forest'
 }
 
 # dynamic import z_custom
