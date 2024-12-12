@@ -10,30 +10,22 @@ from src.common.utils_game import reset_keys
 
 attact = DEFAULT_CONFIG['Heal']
 jump = DEFAULT_CONFIG['Jump']
-
-# pos: layer
-POS_LAYER = {
-    0.140: 5, # layer
-    0.224: 4,
-    0.316: 3,
-    0.404: 2,
-    0.500: 1
-}
+tp = DEFAULT_CONFIG['Tp']
 
 LAYER_POS = {
-    5: 0.140, # layer
-    4: 0.224,
-    3: 0.316,
-    2: 0.404,
-    1: 0.500
+    5: 0.111, # layer
+    4: 0.217,
+    3: 0.305,
+    2: 0.401,
+    1: 0.490
 }
 
-
+POS_LAYER = {v: k for k, v in LAYER_POS.items()}
 
 LADDER_POS = {
     5: [0.209],
     4: [0.311],
-    3: [0.212, 0.418],
+    3: [0.212, 0.417],
     2: [0.308, 0.520]
 }
 
@@ -196,14 +188,14 @@ def move_to_upper_layer(current_layer, target_layer, player_pos):
         else:
             if player_pos[0] < closest_ladder:
                 key_down('right')
-                while player_pos[0] < closest_ladder - jump_tolarance:
+                while player_pos[0] < closest_ladder - jump_tolarance and player_pos[1] > LAYER_POS[current_layer] + 0.05:
                     player_pos = config.player_pos if config.player_pos else player_pos
                     time.sleep(0.01)
                 key_up('right')
             else:
                 key_down('left')
                 # print(player_pos, closest_ladder)
-                while player_pos[0] > closest_ladder + jump_tolarance:
+                while player_pos[0] > closest_ladder + jump_tolarance and player_pos[1] > LAYER_POS[current_layer] + 0.05:
                     player_pos = config.player_pos if config.player_pos else player_pos
                     time.sleep(0.01)
                 key_up('left')
@@ -233,17 +225,22 @@ def move_to_lower_layer(current_layer, target_layer, player_pos):
     key_down('down')
     key_down(direction)
     press(jump, 1) 
+    key_up('down')
     time.sleep(0.5)
     key_up(direction)
-    key_up('down')
 
 
 def attact_monster(direction_dist):
     """Attack the slime considering direction_dist."""
 
-    too_far = 250
+    too_far = 240
+    distance_to_tp = 200
+
     facing = config.real_player_facing
     # press(DEFAULT_CONFIG['Pick up'], 1)
+    # if abs(direction_dist) > distance_to_tp:
+    #     press(tp, 1)
+
     if direction_dist > too_far:
         key_down('right')
         # time.sleep(0.1)
@@ -257,7 +254,7 @@ def attact_monster(direction_dist):
             time.sleep(0.5)
             key_up('right')
             facing = 'right'
-        press(attact, 2)
+        press(attact, 3)
     else:
         reset_keys(['left', 'right'])
         if facing and facing != 'right':
@@ -265,7 +262,7 @@ def attact_monster(direction_dist):
             time.sleep(0.5)
             key_up('left')
             facing = 'left'
-        press(attact, 2)
+        press(attact, 3)
     time.sleep(0.01)
 
 
